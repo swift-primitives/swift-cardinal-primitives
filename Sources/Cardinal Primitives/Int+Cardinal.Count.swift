@@ -8,7 +8,7 @@ extension Cardinal.Count {
     @inlinable
     public init?(exactly value: Int) {
         guard value >= 0 else { return nil }
-        self.init(__unchecked: UInt(value))
+        self.init(__unchecked: (), UInt(value))
     }
 
     /// Creates a count from a signed integer, throwing if negative.
@@ -20,7 +20,7 @@ extension Cardinal.Count {
         guard value >= 0 else {
             throw .negativeSource(value)
         }
-        self.init(__unchecked: UInt(value))
+        self.init(__unchecked: (), UInt(value))
     }
 }
 

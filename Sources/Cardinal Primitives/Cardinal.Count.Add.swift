@@ -28,9 +28,9 @@ extension Property where Tag == Cardinal.Count.Add, Base == Cardinal.Count {
     public func saturating(_ other: Base) -> Base {
         let (result, overflow) = base.rawValue.addingReportingOverflow(other.rawValue)
         if overflow {
-            return Base(__unchecked: .max)
+            return Base(__unchecked: (), .max)
         }
-        return Base(__unchecked: result)
+        return Base(__unchecked: (), result)
     }
 
     /// Adds a count, throwing on overflow.
@@ -44,6 +44,6 @@ extension Property where Tag == Cardinal.Count.Add, Base == Cardinal.Count {
         if overflow {
             throw .overflow
         }
-        return Base(__unchecked: result)
+        return Base(__unchecked: (), result)
     }
 }

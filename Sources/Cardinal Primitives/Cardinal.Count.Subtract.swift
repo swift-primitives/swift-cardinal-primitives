@@ -38,7 +38,7 @@ extension Property where Tag == Cardinal.Count.Subtract, Base == Cardinal.Count 
         if other.rawValue >= base.rawValue {
             return .zero
         }
-        return Base(__unchecked: base.rawValue - other.rawValue)
+        return Base(__unchecked: (), base.rawValue - other.rawValue)
     }
 
     /// Subtracts a count, throwing on underflow.
@@ -51,6 +51,6 @@ extension Property where Tag == Cardinal.Count.Subtract, Base == Cardinal.Count 
         if other.rawValue > base.rawValue {
             throw .underflow
         }
-        return Base(__unchecked: base.rawValue - other.rawValue)
+        return Base(__unchecked: (), base.rawValue - other.rawValue)
     }
 }
