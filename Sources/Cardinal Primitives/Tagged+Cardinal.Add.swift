@@ -54,7 +54,7 @@ extension Property {
     where
     Tag == Tagged<T, Cardinal>.Add,
     Base == Tagged<T, Cardinal> {
-        base.map { try! $0.add.exact(other.rawValue) }
+        try base.map { cardinal throws(Cardinal.Error) in try cardinal.add.exact(other.rawValue) }
     }
 
     /// Callable syntax for exact addition.

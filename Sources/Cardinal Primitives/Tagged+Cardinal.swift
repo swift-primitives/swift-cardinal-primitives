@@ -22,13 +22,13 @@ extension Tagged where RawValue == Cardinal, Tag: ~Copyable {
     @inlinable
     @_disfavoredOverload
     public static var zero: Self {
-        Self(__unchecked: (), Cardinal.zero)
+        Self(.zero)
     }
 
     /// The count of one.
     @inlinable
     public static var one: Self {
-        Self(__unchecked: (), Cardinal.one)
+        Self(.one)
     }
 }
 
@@ -38,13 +38,14 @@ extension Tagged where RawValue == Cardinal, Tag: ~Copyable {
     /// Creates a tagged cardinal from a cardinal.
     @inlinable
     public init(_ count: Cardinal) {
+        // VALIDATED SOLE __unchecked lift to Tagged
         self.init(__unchecked: (), count)
     }
 
     /// Creates a tagged cardinal from an unsigned integer.
     @inlinable
     public init(_ uint: UInt) {
-        self.init(__unchecked: (), Cardinal(uint))
+        self.init(Cardinal(uint))
     }
 
     /// Creates a tagged cardinal from a signed integer.
@@ -53,7 +54,7 @@ extension Tagged where RawValue == Cardinal, Tag: ~Copyable {
     /// - Throws: `Cardinal.Error.negativeSource` if negative.
     @inlinable
     public init(_ int: Int) throws(Cardinal.Error) {
-        self.init(__unchecked: (), try Cardinal(int))
+        self.init(try Cardinal(int))
     }
 }
 
@@ -98,20 +99,3 @@ extension Tagged where RawValue == Cardinal, Tag: ~Copyable {
         lhs = lhs + rhs
     }
 }
-//
-//// MARK: - Tagged<Tag, Cardinal> Scalar Multiplication
-//
-//extension Tagged where RawValue == Cardinal, Tag: ~Copyable {
-//    /// Multiplies a tagged cardinal by an unsigned integer.
-//    @inlinable
-//    public static func * (lhs: Self, rhs: UInt) -> Self {
-//        Self(Cardinal(lhs.rawValue.rawValue * rhs))
-//    }
-//
-//    /// Multiplies an unsigned integer by a tagged cardinal.
-//    @inlinable
-//    public static func * (lhs: UInt, rhs: Self) -> Self {
-//        Self(Cardinal(lhs * rhs.rawValue.rawValue))
-//    }
-//}
-//

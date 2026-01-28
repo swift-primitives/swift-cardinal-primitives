@@ -12,7 +12,7 @@ extension Cardinal {
         guard value >= .zero else {
             throw .negativeSource(value)
         }
-        self.init(__unchecked: (), UInt(value))
+        self.init(UInt(value))
     }
 }
 
