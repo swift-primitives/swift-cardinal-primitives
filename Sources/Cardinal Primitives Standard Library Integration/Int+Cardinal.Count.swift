@@ -27,19 +27,6 @@ extension Cardinal {
 // MARK: - Cardinal to Int Conversions
 
 extension Int {
-    /// Creates an integer from a count, returning `nil` if it exceeds `Int.max`.
-    ///
-    /// On 64-bit platforms, this can fail for counts near `UInt.max`.
-    /// On 32-bit platforms, this fails for counts exceeding `Int32.max`.
-    ///
-    /// - Parameter count: The cardinal count.
-    /// - Returns: The integer value if representable, otherwise `nil`.
-    @inlinable
-    public init?(exactly count: Cardinal) {
-        guard count.rawValue <= UInt(Int.max) else { return nil }
-        self = Int(count.rawValue)
-    }
-
     /// Creates an integer from a count, throwing if it exceeds `Int.max`.
     ///
     /// - Parameter count: The cardinal count.

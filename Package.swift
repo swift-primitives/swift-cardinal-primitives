@@ -28,12 +28,25 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Cardinal Primitives",
+            name: "Cardinal Primitives Core",
             dependencies: [
                 .product(name: "Identity Primitives", package: "swift-identity-primitives"),
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
                 .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
+            ]
+        ),
+        .target(
+            name: "Cardinal Primitives",
+            dependencies: [
+                "Cardinal Primitives Core",
+                "Cardinal Primitives Standard Library Integration",
+            ]
+        ),
+        .target(
+            name: "Cardinal Primitives Standard Library Integration",
+            dependencies: [
+                "Cardinal Primitives Core",
             ]
         ),
         .target(
