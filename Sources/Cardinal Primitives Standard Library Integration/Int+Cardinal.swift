@@ -32,4 +32,29 @@ extension Int {
         }
         self = Int(cardinal.rawValue)
     }
+
+    /// Creates an integer by reinterpreting the count's bit pattern.
+    ///
+    /// This is an unchecked conversion that reinterprets the underlying `UInt`
+    /// as `Int`. Values greater than `Int.max` become negative.
+    ///
+    /// Use this for pointer arithmetic and other low-level operations where
+    /// you need the raw bit pattern without validation.
+    ///
+    /// - Parameter cardinal: The cardinal count.
+    @inlinable
+    public init(bitPattern cardinal: Cardinal) {
+        self = Int(bitPattern: cardinal.rawValue)
+    }
+
+    /// Creates an integer from a count, clamping to `Int.max` if too large.
+    ///
+    /// Use this for APIs like `Sequence.underestimatedCount` that return `Int`
+    /// but where the actual count may exceed `Int.max`.
+    ///
+    /// - Parameter cardinal: The cardinal count.
+    @inlinable
+    public init(clamping cardinal: Cardinal) {
+        self = Int(clamping: cardinal.rawValue)
+    }
 }

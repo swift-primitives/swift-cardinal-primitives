@@ -42,24 +42,27 @@ extension Property {
     /// Saturating addition: returns `min(UInt.max, self + other)`.
     @inlinable
     public func saturating<T: ~Copyable>(_ other: Base) -> Base
-    where Tag == Tagged<T, Cardinal>.Add,
-          Base == Tagged<T, Cardinal> {
-        Base(__unchecked: (), base.rawValue.add.saturating(other.rawValue))
+    where
+    Tag == Tagged<T, Cardinal>.Add,
+    Base == Tagged<T, Cardinal> {
+        base.map { $0.add.saturating(other.rawValue) }
     }
 
     /// Exact addition: returns `self + other` or throws if overflow.
     @inlinable
     public func exact<T: ~Copyable>(_ other: Base) throws(Cardinal.Error) -> Base
-    where Tag == Tagged<T, Cardinal>.Add,
-          Base == Tagged<T, Cardinal> {
-        Base(__unchecked: (), try base.rawValue.add.exact(other.rawValue))
+    where
+    Tag == Tagged<T, Cardinal>.Add,
+    Base == Tagged<T, Cardinal> {
+        base.map { try! $0.add.exact(other.rawValue) }
     }
 
     /// Callable syntax for exact addition.
     @inlinable
     public func callAsFunction<T: ~Copyable>(_ other: Base) throws(Cardinal.Error) -> Base
-    where Tag == Tagged<T, Cardinal>.Add,
-          Base == Tagged<T, Cardinal> {
+    where
+    Tag == Tagged<T, Cardinal>.Add,
+    Base == Tagged<T, Cardinal> {
         try self.exact(other)
     }
 }
