@@ -27,12 +27,12 @@ struct CardinalCountTests {
 
     @Test
     func constructionExactlyReturnsNilForNegative() {
-        #expect(Cardinal(exactly: Int(-1)) == nil)
+        #expect((try? Cardinal(Int(-1))) == nil)
     }
 
     @Test
     func constructionExactlySucceeds() {
-        #expect(Cardinal(exactly: 42) == 42)
+        #expect((try? Cardinal(42)) == 42)
     }
 
     // MARK: - Constants
@@ -156,6 +156,6 @@ struct CardinalCountTests {
     @Test
     func intConversionExactlySuccess() throws {
         let count: Cardinal = 42
-        #expect(Int(exactly: count) == 42)
+        #expect((try? Int(count)) == 42)
     }
 }

@@ -34,10 +34,14 @@
 /// - **Backing**: `UInt` (machine word) ensures non-negativity at the type level
 /// - **Addition**: Trapping `+` operator matches Swift integer semantics
 /// - **Subtraction**: No `-` operator; use `.subtract.saturating` (monus) or `.subtract.exact`
-public struct Cardinal: Hashable, Comparable, Sendable {
+public struct Cardinal {
     /// The underlying unsigned integer value.
     public let rawValue: UInt
 }
+
+extension Cardinal: Hashable {}
+extension Cardinal: Comparable {}
+extension Cardinal: Sendable {}
 
 extension Cardinal {
     
