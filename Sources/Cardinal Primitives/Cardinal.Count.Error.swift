@@ -1,4 +1,4 @@
-extension Cardinal.Count {
+extension Cardinal {
     /// Errors that can occur during cardinal operations.
     public enum Error: Swift.Error, Hashable, Sendable {
         /// The operation would overflow the representable range.

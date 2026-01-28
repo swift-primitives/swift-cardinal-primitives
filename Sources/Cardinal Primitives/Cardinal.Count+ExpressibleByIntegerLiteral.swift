@@ -11,15 +11,15 @@
 
 // MARK: - ExpressibleByIntegerLiteral
 
-extension Cardinal.Count: ExpressibleByIntegerLiteral {
+extension Cardinal: ExpressibleByIntegerLiteral {
     /// Creates a count from an unsigned integer literal.
     ///
     /// This conformance is total (cannot fail) because the literal type is `UInt`,
     /// which matches the backing type. Negative literals are compile-time errors.
     ///
     /// ```swift
-    /// let count: Cardinal.Count = 10  // OK
-    /// let invalid: Cardinal.Count = -1  // Compile error: negative literal
+    /// let count: Cardinal = 10  // OK
+    /// let invalid: Cardinal = -1  // Compile error: negative literal
     /// ```
     @_disfavoredOverload
     @inlinable

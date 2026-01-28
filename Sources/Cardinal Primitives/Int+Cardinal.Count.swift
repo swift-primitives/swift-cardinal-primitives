@@ -1,6 +1,6 @@
-// MARK: - Int to Cardinal.Count Conversions
+// MARK: - Int to Cardinal Conversions
 
-extension Cardinal.Count {
+extension Cardinal {
     /// Creates a count from a signed integer, returning `nil` if negative.
     ///
     /// - Parameter value: The signed integer value.
@@ -24,7 +24,7 @@ extension Cardinal.Count {
     }
 }
 
-// MARK: - Cardinal.Count to Int Conversions
+// MARK: - Cardinal to Int Conversions
 
 extension Int {
     /// Creates an integer from a count, returning `nil` if it exceeds `Int.max`.
@@ -35,7 +35,7 @@ extension Int {
     /// - Parameter count: The cardinal count.
     /// - Returns: The integer value if representable, otherwise `nil`.
     @inlinable
-    public init?(exactly count: Cardinal.Count) {
+    public init?(exactly count: Cardinal) {
         guard count.rawValue <= UInt(Int.max) else { return nil }
         self = Int(count.rawValue)
     }
@@ -43,9 +43,9 @@ extension Int {
     /// Creates an integer from a count, throwing if it exceeds `Int.max`.
     ///
     /// - Parameter count: The cardinal count.
-    /// - Throws: `Cardinal.Count.Error.overflow` if the count exceeds `Int.max`.
+    /// - Throws: `Cardinal.Error.overflow` if the count exceeds `Int.max`.
     @inlinable
-    public init(_ count: Cardinal.Count) throws(Cardinal.Count.Error) {
+    public init(_ count: Cardinal) throws(Cardinal.Error) {
         guard count.rawValue <= UInt(Int.max) else {
             throw .overflow
         }

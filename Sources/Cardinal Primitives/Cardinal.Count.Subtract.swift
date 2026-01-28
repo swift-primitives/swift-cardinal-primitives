@@ -1,6 +1,6 @@
 public import Property_Primitives
 
-extension Cardinal.Count {
+extension Cardinal {
     /// Tag type for subtraction operations.
     public enum Subtract {}
 
@@ -18,7 +18,7 @@ extension Cardinal.Count {
     }
 }
 
-extension Property where Tag == Cardinal.Count.Subtract, Base == Cardinal.Count {
+extension Property where Tag == Cardinal.Subtract, Base == Cardinal {
     /// Subtracts a count using monus (truncated subtraction).
     ///
     /// The monus operation `a ∸ b` is defined as `max(0, a - b)`.
@@ -45,7 +45,7 @@ extension Property where Tag == Cardinal.Count.Subtract, Base == Cardinal.Count 
     ///
     /// - Parameter other: The count to subtract.
     /// - Returns: The difference.
-    /// - Throws: `Cardinal.Count.Error.underflow` if `other > self`.
+    /// - Throws: `Cardinal.Error.underflow` if `other > self`.
     @inlinable
     public func exact(_ other: Base) throws(Base.Error) -> Base {
         if other.rawValue > base.rawValue {

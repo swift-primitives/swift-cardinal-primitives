@@ -1,6 +1,6 @@
 public import Property_Primitives
 
-extension Cardinal.Count {
+extension Cardinal {
     /// Tag type for addition operations.
     public enum Add {}
 
@@ -17,10 +17,10 @@ extension Cardinal.Count {
     }
 }
 
-extension Property where Tag == Cardinal.Count.Add, Base == Cardinal.Count {
+extension Property where Tag == Cardinal.Add, Base == Cardinal {
     /// Adds a count, saturating at the maximum representable value.
     ///
-    /// If the sum would overflow, returns `Cardinal.Count(UInt.max)`.
+    /// If the sum would overflow, returns `Cardinal(UInt.max)`.
     ///
     /// - Parameter other: The count to add.
     /// - Returns: The sum, clamped to `UInt.max` on overflow.
@@ -37,7 +37,7 @@ extension Property where Tag == Cardinal.Count.Add, Base == Cardinal.Count {
     ///
     /// - Parameter other: The count to add.
     /// - Returns: The sum.
-    /// - Throws: `Cardinal.Count.Error.overflow` if the sum exceeds `UInt.max`.
+    /// - Throws: `Cardinal.Error.overflow` if the sum exceeds `UInt.max`.
     @inlinable
     public func exact(_ other: Base) throws(Base.Error) -> Base {
         let (result, overflow) = base.rawValue.addingReportingOverflow(other.rawValue)

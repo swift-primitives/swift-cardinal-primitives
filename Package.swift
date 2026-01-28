@@ -21,6 +21,7 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(path: "../swift-identity-primitives"),
         .package(path: "../swift-property-primitives"),
         .package(path: "../swift-equation-primitives"),
         .package(path: "../swift-comparison-primitives"),
@@ -29,6 +30,7 @@ let package = Package(
         .target(
             name: "Cardinal Primitives",
             dependencies: [
+                .product(name: "Identity Primitives", package: "swift-identity-primitives"),
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
                 .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
