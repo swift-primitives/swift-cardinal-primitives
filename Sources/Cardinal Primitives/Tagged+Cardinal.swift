@@ -20,7 +20,6 @@ extension Tagged where RawValue == Cardinal, Tag: ~Copyable {
 
     /// The zero count.
     @inlinable
-    @_disfavoredOverload
     public static var zero: Self {
         Self(.zero)
     }
