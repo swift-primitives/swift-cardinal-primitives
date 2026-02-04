@@ -56,17 +56,18 @@ extension Cardinal {
     }
 }
 
-extension Cardinal {
+extension Cardinal.`Protocol` {
     // MARK: - Constants
-    
+
     /// The zero count.
     @inlinable
-    public static var zero: Self { Self(.zero) }
-    
+    public static var zero: Self { Self(Cardinal(0)) }
+
     /// The count of one.
     @inlinable
-    public static var one: Self { Self(1) }
+    public static var one: Self { Self(Cardinal(1)) }
 }
+
 
 extension Cardinal {
     // MARK: - Trapping Addition

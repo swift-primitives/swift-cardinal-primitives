@@ -35,7 +35,7 @@ extension Property where Tag == Cardinal.Subtract, Base == Cardinal {
     /// - Returns: The difference, or zero if `other > self`.
     @inlinable
     public func saturating(_ other: Base) -> Base {
-        if other.rawValue >= base.rawValue {
+        if other >= base {
             return .zero
         }
         return Base(base.rawValue - other.rawValue)

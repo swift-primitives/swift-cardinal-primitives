@@ -11,24 +11,10 @@
 
 public import Identity_Primitives
 
-// MARK: - Tagged<Tag, Cardinal> Properties and Constants
-
-extension Tagged where RawValue == Cardinal, Tag: ~Copyable {
+extension Cardinal.`Protocol` {
     /// The underlying cardinal value.
     @inlinable
-    public var count: Cardinal { rawValue }
-
-    /// The zero count.
-    @inlinable
-    public static var zero: Self {
-        Self(.zero)
-    }
-
-    /// The count of one.
-    @inlinable
-    public static var one: Self {
-        Self(.one)
-    }
+    public var count: Cardinal { self.cardinal }
 }
 
 // MARK: - Tagged<Tag, Cardinal> Construction
@@ -83,18 +69,3 @@ extension Int {
     }
 }
 
-// MARK: - Tagged<Tag, Cardinal> Arithmetic
-
-extension Tagged where RawValue == Cardinal, Tag: ~Copyable {
-    /// Adds two tagged cardinals (trapping on overflow).
-    @inlinable
-    public static func + (lhs: Self, rhs: Self) -> Self {
-        Self(lhs.rawValue + rhs.rawValue)
-    }
-
-    /// Increments a tagged cardinal by another (trapping on overflow).
-    @inlinable
-    public static func += (lhs: inout Self, rhs: Self) {
-        lhs = lhs + rhs
-    }
-}
