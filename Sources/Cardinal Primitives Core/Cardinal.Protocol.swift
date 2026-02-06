@@ -25,6 +25,18 @@ extension Cardinal {
     ///     C(cardinal: Cardinal(computeAligned(value.cardinal.rawValue)))
     /// }
     /// ```
+    ///
+    /// ## Future: Domain-based Unification
+    ///
+    /// Cross-type operators (Ordinal + Cardinal, comparisons) are currently
+    /// duplicated for bare and tagged types. Full unification via an
+    /// `associatedtype Domain` is blocked by Swift's requirement that
+    /// associated types be `Copyable`. When `Tag: ~Copyable`, we cannot
+    /// satisfy `Domain = Tag`.
+    ///
+    /// See: swift-cardinal-primitives/Experiments/tag-preserving-protocol-abstraction/
+    /// for the validated design that would enable full unification once Swift
+    /// allows `associatedtype Domain: ~Copyable`.
     public protocol `Protocol` {
         /// The underlying cardinal value.
         var cardinal: Cardinal { get }
