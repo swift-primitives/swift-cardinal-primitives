@@ -48,7 +48,7 @@ extension Property where Tag == Cardinal.Subtract, Base == Cardinal {
     /// - Throws: `Cardinal.Error.underflow` if `other > self`.
     @inlinable
     public func exact(_ other: Base) throws(Base.Error) -> Base {
-        if other.rawValue > base.rawValue {
+        if other > base {
             throw .underflow
         }
         return Base(base.rawValue - other.rawValue)
