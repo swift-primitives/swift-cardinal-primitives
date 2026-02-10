@@ -53,6 +53,7 @@ let package = Package(
             name: "Cardinal Primitives Test Support",
             dependencies: [
                 "Cardinal Primitives",
+                .product(name: "Identity Primitives Test Support", package: "swift-identity-primitives"),
             ],
             path: "Tests/Support"
         ),
