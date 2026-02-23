@@ -26,18 +26,15 @@ extension Cardinal {
     /// }
     /// ```
     ///
-    /// ## Future: Domain-based Unification
-    ///
-    /// Cross-type operators (Ordinal + Cardinal, comparisons) are currently
-    /// duplicated for bare and tagged types. Full unification via an
-    /// `associatedtype Domain` is blocked by Swift's requirement that
-    /// associated types be `Copyable`. When `Tag: ~Copyable`, we cannot
-    /// satisfy `Domain = Tag`.
-    ///
-    /// See: swift-cardinal-primitives/Experiments/tag-preserving-protocol-abstraction/
-    /// for the validated design that would enable full unification once Swift
-    /// allows `associatedtype Domain: ~Copyable`.
     public protocol `Protocol` {
+        /// The domain that scopes this cardinal quantity.
+        ///
+        /// For bare `Cardinal`, `Domain` is `Never` (unscoped).
+        /// For `Tagged<Tag, Cardinal>`, `Domain` is `Tag`, enabling
+        /// cross-type operators to enforce same-tag safety via
+        /// `where O.Domain == C.Domain`.
+        associatedtype Domain: ~Copyable
+
         /// The underlying cardinal value.
         var cardinal: Cardinal { get }
 
@@ -49,6 +46,9 @@ extension Cardinal {
 // MARK: - Cardinal Conformance
 
 extension Cardinal: Cardinal.`Protocol` {
+    /// Bare cardinals are unscoped.
+    public typealias Domain = Never
+
     /// Returns self.
     @inlinable
     public var cardinal: Cardinal { self }
@@ -63,6 +63,9 @@ extension Cardinal: Cardinal.`Protocol` {
 // MARK: - Tagged Conformance
 
 extension Tagged: Cardinal.`Protocol` where RawValue == Cardinal, Tag: ~Copyable {
+    /// The phantom type is the domain.
+    public typealias Domain = Tag
+
     /// The underlying cardinal value.
     @inlinable
     public var cardinal: Cardinal { rawValue }
