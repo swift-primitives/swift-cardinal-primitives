@@ -14,6 +14,7 @@ extension Cardinal {
         }
         self.init(UInt(value))
     }
+
 }
 
 // MARK: - Cardinal to Int Conversions

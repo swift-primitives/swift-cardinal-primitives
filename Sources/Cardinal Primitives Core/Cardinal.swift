@@ -68,10 +68,15 @@ extension Cardinal.`Protocol` {
     public static var one: Self { Self(Cardinal(1)) }
 }
 
+extension Cardinal {
+    /// The maximum representable count.
+    @inlinable
+    public static var max: Cardinal { Cardinal(UInt.max) }
+}
 
 extension Cardinal {
     // MARK: - Trapping Addition
-    
+
     /// Adds two counts, trapping on overflow.
     ///
     /// This matches Swift integer semantics: overflow is a programmer error
