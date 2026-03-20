@@ -27,6 +27,8 @@ let package = Package(
         .package(path: "../swift-comparison-primitives"),
     ],
     targets: [
+
+        // MARK: - Core
         .target(
             name: "Cardinal Primitives Core",
             dependencies: [
@@ -36,6 +38,8 @@ let package = Package(
                 .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
             ]
         ),
+
+        // MARK: - Umbrella
         .target(
             name: "Cardinal Primitives",
             dependencies: [
@@ -43,12 +47,16 @@ let package = Package(
                 "Cardinal Primitives Standard Library Integration",
             ]
         ),
+
+        // MARK: - StdLib Integration
         .target(
             name: "Cardinal Primitives Standard Library Integration",
             dependencies: [
                 "Cardinal Primitives Core",
             ]
         ),
+
+        // MARK: - Test Support
         .target(
             name: "Cardinal Primitives Test Support",
             dependencies: [
@@ -57,6 +65,8 @@ let package = Package(
             ],
             path: "Tests/Support"
         ),
+
+        // MARK: - Tests
         .testTarget(
             name: "Cardinal Primitives Tests",
             dependencies: [
