@@ -1,0 +1,15 @@
+// MARK: - Cardinal to UInt32 Conversion
+
+extension UInt32 {
+    /// Creates a 32-bit unsigned integer from any cardinal value.
+    ///
+    /// Accepts both bare `Cardinal` and phantom-typed `Tagged<Tag, Cardinal>` via
+    /// `Cardinal.Protocol` conformance.
+    ///
+    /// - Parameter cardinal: The cardinal value.
+    /// - Precondition: The cardinal's value must fit in `UInt32`.
+    @inlinable
+    public init<C: Cardinal.`Protocol`>(_ cardinal: C) {
+        self = UInt32(cardinal.cardinal.rawValue)
+    }
+}
