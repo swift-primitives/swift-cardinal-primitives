@@ -1,2 +1,2 @@
-public import Cardinal_Primitives
+internal import Cardinal_Primitives
 @_exported public import Identity_Primitives_Test_Support
