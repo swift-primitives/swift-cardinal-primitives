@@ -16,6 +16,14 @@ let package = Package(
             targets: ["Cardinal Primitives"]
         ),
         .library(
+            name: "Cardinal Primitives Core",
+            targets: ["Cardinal Primitives Core"]
+        ),
+        .library(
+            name: "Cardinal Primitives Standard Library Integration",
+            targets: ["Cardinal Primitives Standard Library Integration"]
+        ),
+        .library(
             name: "Cardinal Primitives Test Support",
             targets: ["Cardinal Primitives Test Support"]
         ),
