@@ -1,0 +1,46 @@
+{
+  "$schema": "https://swift-institute.org/schemas/experiments-index-v1.json",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-04-18",
+  "title": "Experiments Index",
+  "blurb": "",
+  "scope": "swift-cardinal-primitives (swift-primitives)",
+  "experiments": [
+    {
+      "directory": "cardinal-protocol-abstraction",
+      "displayName": "cardinal-protocol-abstraction",
+      "purpose": "Validate Cardinal.Protocol pattern: nested protocol, Tagged conformance, type-preserving generics",
+      "date": "2026-02-04",
+      "toolchain": "Apple Swift 6.2.3",
+      "status": "CONFIRMED",
+      "statusDetail": null,
+      "statusRaw": "CONFIRMED",
+      "supersededBy": null,
+      "crossRefs": []
+    },
+    {
+      "directory": "generalized-protocol-abstraction",
+      "displayName": "generalized-protocol-abstraction",
+      "purpose": "Test whether X.Protocol can be unified into a single generic mechanism (Representable, RepresentedBy, Optic.Iso)",
+      "date": "2026-02-04",
+      "toolchain": "Apple Swift 6.2.3",
+      "status": "CONFIRMED",
+      "statusDetail": null,
+      "statusRaw": "CONFIRMED",
+      "supersededBy": null,
+      "crossRefs": []
+    },
+    {
+      "directory": "tag-preserving-protocol-abstraction",
+      "displayName": "tag-preserving-protocol-abstraction",
+      "purpose": "Test associatedtype Domain for same-tag enforcement in cross-type operators, companion types for different return types",
+      "date": "2026-02-04",
+      "toolchain": "Apple Swift 6.2.3",
+      "status": "CONFIRMED",
+      "statusDetail": null,
+      "statusRaw": "CONFIRMED",
+      "supersededBy": null,
+      "crossRefs": []
+    }
+  ]
+}
