@@ -201,7 +201,7 @@
 
 ---
 
-### 9. swift-identity-primitives
+### 9. swift-tagged-primitives
 
 | File | Line | Operator | LHS Type | RHS Type | Return Type | Throws | Semantic Category |
 |------|------|----------|----------|----------|-------------|--------|-------------------|

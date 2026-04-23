@@ -36,7 +36,7 @@ All packages under `/Users/coen/Developer/swift-primitives/`:
 - `swift-index-primitives`
 - `swift-memory-primitives`
 - `swift-buffer-primitives`
-- `swift-identity-primitives`
+- `swift-tagged-primitives`
 - `swift-equation-primitives`
 - `swift-comparison-primitives`
 - And any other `swift-*-primitives` directories present

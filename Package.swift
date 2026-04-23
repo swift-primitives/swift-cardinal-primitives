@@ -29,7 +29,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "../swift-identity-primitives"),
+        .package(path: "../swift-tagged-primitives"),
         .package(path: "../swift-property-primitives"),
         .package(path: "../swift-equation-primitives"),
         .package(path: "../swift-comparison-primitives"),
@@ -40,7 +40,7 @@ let package = Package(
         .target(
             name: "Cardinal Primitives Core",
             dependencies: [
-                .product(name: "Identity Primitives", package: "swift-identity-primitives"),
+                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
                 .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
@@ -69,7 +69,7 @@ let package = Package(
             name: "Cardinal Primitives Test Support",
             dependencies: [
                 "Cardinal Primitives",
-                .product(name: "Identity Primitives Test Support", package: "swift-identity-primitives"),
+                .product(name: "Tagged Primitives Test Support", package: "swift-tagged-primitives"),
             ],
             path: "Tests/Support"
         ),

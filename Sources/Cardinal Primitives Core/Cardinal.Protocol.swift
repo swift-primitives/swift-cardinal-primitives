@@ -1,7 +1,7 @@
 // Cardinal.Protocol.swift
 // Abstraction over types that carry a cardinal quantity.
 
-public import Identity_Primitives
+public import Tagged_Primitives
 
 // MARK: - Protocol
 

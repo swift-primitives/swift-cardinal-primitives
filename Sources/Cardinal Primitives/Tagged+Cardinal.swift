@@ -9,7 +9,7 @@
 //
 // ===----------------------------------------------------------------------===//
 
-public import Identity_Primitives
+public import Tagged_Primitives
 
 extension Cardinal.`Protocol` {
     /// The underlying cardinal value.
