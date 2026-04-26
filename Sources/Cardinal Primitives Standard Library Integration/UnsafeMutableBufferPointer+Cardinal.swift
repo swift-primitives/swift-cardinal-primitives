@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Carrier_Primitives
+
 // MARK: - UnsafeMutableBufferPointer + Cardinal.Protocol
 
 extension UnsafeMutableBufferPointer where Element: ~Copyable {
@@ -21,7 +23,7 @@ extension UnsafeMutableBufferPointer where Element: ~Copyable {
     ///   - start: A pointer to the start of the buffer.
     ///   - count: The number of elements in the buffer.
     @inlinable
-    public init<C: Cardinal.`Protocol`>(start: UnsafeMutablePointer<Element>?, count: C) {
+    public init(start: UnsafeMutablePointer<Element>?, count: some Carrier<Cardinal>) {
         unsafe self.init(start: start, count: Int(bitPattern: count.cardinal))
     }
 
@@ -33,7 +35,7 @@ extension UnsafeMutableBufferPointer where Element: ~Copyable {
     /// - Parameter capacity: The number of elements to allocate.
     /// - Returns: A new mutable buffer pointer to uninitialized memory.
     @inlinable
-    public static func allocate<C: Cardinal.`Protocol`>(capacity: C) -> Self {
+    public static func allocate(capacity: some Carrier<Cardinal>) -> Self {
         Self.allocate(capacity: Int(bitPattern: capacity.cardinal))
     }
 }

@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Carrier_Primitives
+
 // MARK: - ContiguousArray + Cardinal.Protocol
 
 extension ContiguousArray {
@@ -21,7 +23,7 @@ extension ContiguousArray {
     ///   - repeatedValue: The value to repeat.
     ///   - count: The number of times to repeat the value.
     @inlinable
-    public init<C: Cardinal.`Protocol`>(repeating repeatedValue: Element, count: C) {
+    public init(repeating repeatedValue: Element, count: some Carrier<Cardinal>) {
         self.init(repeating: repeatedValue, count: Int(bitPattern: count.cardinal))
     }
 }

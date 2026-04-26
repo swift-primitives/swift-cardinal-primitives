@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Carrier_Primitives
+
 // MARK: - OutputSpan + Cardinal.Protocol
 
 extension Swift.OutputSpan where Element: ~Copyable {
@@ -33,9 +35,9 @@ extension Swift.OutputSpan where Element: ~Copyable {
     @unsafe
     @inlinable
     @_lifetime(borrow buffer)
-    public init<C: Cardinal.`Protocol`>(
+    public init(
         buffer: UnsafeMutableBufferPointer<Element>,
-        initializedCount: C
+        initializedCount: some Carrier<Cardinal>
     ) {
         unsafe self.init(
             buffer: buffer,
@@ -53,7 +55,7 @@ extension Swift.OutputSpan where Element: ~Copyable {
     ///     `Cardinal.Protocol` conformer.
     @inlinable
     @_lifetime(self: copy self)
-    public mutating func removeLast<C: Cardinal.`Protocol`>(_ k: C) {
+    public mutating func removeLast(_ k: some Carrier<Cardinal>) {
         removeLast(Int(bitPattern: k.cardinal))
     }
 }
@@ -73,9 +75,9 @@ extension Swift.OutputSpan {
     ///       `Cardinal.Protocol` conformer.
     @inlinable
     @_lifetime(self: copy self)
-    public mutating func append<C: Cardinal.`Protocol`>(
+    public mutating func append(
         repeating repeatedValue: Element,
-        count: C
+        count: some Carrier<Cardinal>
     ) {
         append(repeating: repeatedValue, count: Int(bitPattern: count.cardinal))
     }

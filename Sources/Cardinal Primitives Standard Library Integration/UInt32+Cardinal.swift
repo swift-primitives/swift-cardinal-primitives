@@ -1,3 +1,5 @@
+public import Carrier_Primitives
+
 // MARK: - Cardinal to UInt32 Conversion
 
 extension UInt32 {
@@ -9,7 +11,7 @@ extension UInt32 {
     /// - Parameter cardinal: The cardinal value.
     /// - Precondition: The cardinal's value must fit in `UInt32`.
     @inlinable
-    public init<C: Cardinal.`Protocol`>(_ cardinal: C) {
+    public init(_ cardinal: some Carrier<Cardinal>) {
         self = UInt32(cardinal.cardinal.rawValue)
     }
 }

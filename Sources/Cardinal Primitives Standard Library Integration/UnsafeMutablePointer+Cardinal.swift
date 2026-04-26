@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Carrier_Primitives
+
 // MARK: - UnsafeMutablePointer + Cardinal.Protocol
 
 extension UnsafeMutablePointer {
@@ -21,9 +23,9 @@ extension UnsafeMutablePointer {
     ///   - source: A pointer to the values to copy.
     ///   - count: The number of elements to copy.
     @inlinable
-    public func initialize<C: Cardinal.`Protocol`>(
+    public func initialize(
         from source: UnsafePointer<Pointee>,
-        count: C
+        count: some Carrier<Cardinal>
     ) {
         unsafe self.initialize(from: source, count: Int(bitPattern: count.cardinal))
     }
@@ -42,9 +44,9 @@ extension UnsafeMutablePointer where Pointee: ~Copyable {
     ///   - source: A pointer to the values to move.
     ///   - count: The number of elements to move.
     @inlinable
-    public func moveInitialize<C: Cardinal.`Protocol`>(
+    public func moveInitialize(
         from source: UnsafeMutablePointer,
-        count: C
+        count: some Carrier<Cardinal>
     ) {
         unsafe self.moveInitialize(from: source, count: Int(bitPattern: count.cardinal))
     }

@@ -11,12 +11,6 @@
 
 public import Tagged_Primitives
 
-extension Cardinal.`Protocol` {
-    /// The underlying cardinal value.
-    @inlinable
-    public var count: Cardinal { self.cardinal }
-}
-
 // MARK: - Tagged<Tag, Cardinal> Construction
 
 extension Tagged where RawValue == Cardinal, Tag: ~Copyable {
@@ -68,4 +62,3 @@ extension Int {
         self = Int(clamping: count.rawValue)
     }
 }
-

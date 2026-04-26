@@ -56,17 +56,8 @@ extension Cardinal {
     }
 }
 
-extension Cardinal.`Protocol` {
-    // MARK: - Constants
-
-    /// The zero count.
-    @inlinable
-    public static var zero: Self { Self(Cardinal(0)) }
-
-    /// The count of one.
-    @inlinable
-    public static var one: Self { Self(Cardinal(1)) }
-}
+// `static var zero` and `static var one` are now provided by
+// `extension Carrier where Underlying == Cardinal` in Cardinal+Carrier.swift.
 
 extension Cardinal {
     /// The maximum representable count.

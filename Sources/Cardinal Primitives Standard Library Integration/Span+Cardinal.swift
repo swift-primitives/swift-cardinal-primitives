@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Carrier_Primitives
+
 // MARK: - Span + Cardinal.Protocol
 
 extension Swift.Span where Element: ~Copyable {
@@ -23,9 +25,9 @@ extension Swift.Span where Element: ~Copyable {
     /// - Warning: The caller must ensure lifetime safety.
     @_lifetime(immortal)
     @inlinable
-    public init<C: Cardinal.`Protocol`>(
+    public init(
         _unsafeStart start: UnsafePointer<Element>,
-        count: C
+        count: some Carrier<Cardinal>
     ) {
         let span = unsafe Swift.Span(
             _unsafeStart: start,

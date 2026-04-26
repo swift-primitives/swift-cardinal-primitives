@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Carrier_Primitives
+
 // MARK: - UnsafeBufferPointer + Cardinal.Protocol
 
 extension UnsafeBufferPointer where Element: ~Copyable {
@@ -21,7 +23,7 @@ extension UnsafeBufferPointer where Element: ~Copyable {
     ///   - start: A pointer to the start of the buffer.
     ///   - count: The number of elements in the buffer.
     @inlinable
-    public init<C: Cardinal.`Protocol`>(start: UnsafePointer<Element>?, count: C) {
+    public init(start: UnsafePointer<Element>?, count: some Carrier<Cardinal>) {
         unsafe self.init(start: start, count: Int(bitPattern: count.cardinal))
     }
 }
