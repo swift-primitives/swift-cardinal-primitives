@@ -1,6 +1,6 @@
 public import Property_Primitives
 
-extension Cardinal.Count {
+extension Cardinal {
     /// Tag type for addition operations.
     public enum Add {}
 
@@ -17,33 +17,41 @@ extension Cardinal.Count {
     }
 }
 
-extension Property where Tag == Cardinal.Count.Add, Base == Cardinal.Count {
+extension Property where Tag == Cardinal.Add, Base == Cardinal {
     /// Adds a count, saturating at the maximum representable value.
     ///
-    /// If the sum would overflow, returns `Cardinal.Count(UInt.max)`.
+    /// If the sum would overflow, returns `Cardinal(UInt.max)`.
     ///
     /// - Parameter other: The count to add.
     /// - Returns: The sum, clamped to `UInt.max` on overflow.
     @inlinable
     public func saturating(_ other: Base) -> Base {
+        // reason: typed-system bottom-out — Cardinal arithmetic operators must call
+        // stdlib UInt.addingReportingOverflow; Cardinal IS the wrapper implementing
+        // this primitive, so [INFRA-103] / [CONV-016] options (i)–(iv) are circular.
+        // swiftlint:disable:next chained_rawvalue_access_anti_pattern
         let (result, overflow) = base.rawValue.addingReportingOverflow(other.rawValue)
         if overflow {
-            return Base(__unchecked: .max)
+            return Base(.max)
         }
-        return Base(__unchecked: result)
+        return Base(result)
     }
 
     /// Adds a count, throwing on overflow.
     ///
     /// - Parameter other: The count to add.
     /// - Returns: The sum.
-    /// - Throws: `Cardinal.Count.Error.overflow` if the sum exceeds `UInt.max`.
+    /// - Throws: `Cardinal.Error.overflow` if the sum exceeds `UInt.max`.
     @inlinable
     public func exact(_ other: Base) throws(Base.Error) -> Base {
+        // reason: typed-system bottom-out — Cardinal arithmetic operators must call
+        // stdlib UInt.addingReportingOverflow; Cardinal IS the wrapper implementing
+        // this primitive, so [INFRA-103] / [CONV-016] options (i)–(iv) are circular.
+        // swiftlint:disable:next chained_rawvalue_access_anti_pattern
         let (result, overflow) = base.rawValue.addingReportingOverflow(other.rawValue)
         if overflow {
             throw .overflow
         }
-        return Base(__unchecked: result)
+        return Base(result)
     }
 }
