@@ -26,10 +26,6 @@ extension Property where Tag == Cardinal.Add, Base == Cardinal {
     /// - Returns: The sum, clamped to `UInt.max` on overflow.
     @inlinable
     public func saturating(_ other: Base) -> Base {
-        // reason: typed-system bottom-out — Cardinal arithmetic operators must call
-        // stdlib UInt.addingReportingOverflow; Cardinal IS the wrapper implementing
-        // this primitive, so [INFRA-103] / [CONV-016] options (i)–(iv) are circular.
-        // swiftlint:disable:next chained_rawvalue_access_anti_pattern
         let (result, overflow) = base.rawValue.addingReportingOverflow(other.rawValue)
         if overflow {
             return Base(.max)
@@ -44,10 +40,6 @@ extension Property where Tag == Cardinal.Add, Base == Cardinal {
     /// - Throws: `Cardinal.Error.overflow` if the sum exceeds `UInt.max`.
     @inlinable
     public func exact(_ other: Base) throws(Base.Error) -> Base {
-        // reason: typed-system bottom-out — Cardinal arithmetic operators must call
-        // stdlib UInt.addingReportingOverflow; Cardinal IS the wrapper implementing
-        // this primitive, so [INFRA-103] / [CONV-016] options (i)–(iv) are circular.
-        // swiftlint:disable:next chained_rawvalue_access_anti_pattern
         let (result, overflow) = base.rawValue.addingReportingOverflow(other.rawValue)
         if overflow {
             throw .overflow

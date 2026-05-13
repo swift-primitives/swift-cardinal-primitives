@@ -89,10 +89,6 @@ extension Cardinal {
     /// - Returns: The sum of the two counts.
     @inlinable
     public static func + (lhs: Self, rhs: Self) -> Self {
-        // reason: typed-system bottom-out — Cardinal arithmetic operators must call
-        // stdlib UInt.addingReportingOverflow; Cardinal IS the wrapper implementing
-        // this primitive, so [INFRA-103] / [CONV-016] options (i)–(iv) are circular.
-        // swiftlint:disable:next chained_rawvalue_access_anti_pattern
         let (result, overflow) = lhs.rawValue.addingReportingOverflow(rhs.rawValue)
         precondition(!overflow, "Cardinal overflow in addition")
         return Self(result)

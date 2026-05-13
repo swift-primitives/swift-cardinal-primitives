@@ -45,11 +45,6 @@ extension Int {
     /// - Parameter cardinal: The cardinal count.
     @inlinable
     public init(bitPattern cardinal: Cardinal) {
-        // reason: typed-system bottom-out — this file IS the [INFRA-002]
-        // Int.init(bitPattern: Cardinal) integration overload definition; the
-        // cardinal.rawValue → UInt → stdlib Int.init(bitPattern: UInt) chain is
-        // the canonical grounding.
-        // swiftlint:disable:next bitpattern_rawvalue_chain_anti_pattern
         self = Int(bitPattern: cardinal.rawValue)
     }
 
