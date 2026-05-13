@@ -103,6 +103,12 @@ Companion primitives covering the other two things stdlib calls `Int`:
 
 ---
 
+## Community
+
+<!-- BEGIN: discussion -->
+Discuss this package: [swift-institute/discussions/28](https://github.com/orgs/swift-institute/discussions/28)
+<!-- END: discussion -->
+
 ## License
 
 Apache 2.0. See [LICENSE.md](LICENSE.md).
