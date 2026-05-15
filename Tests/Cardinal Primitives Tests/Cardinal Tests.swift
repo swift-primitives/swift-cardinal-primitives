@@ -3,9 +3,21 @@ import Testing
 
 @testable import Cardinal_Primitives
 
-@Suite
-struct CardinalCountTests {
-    // MARK: - Construction
+extension Cardinal {
+    @Suite
+    struct Test {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+        @Suite struct Performance {}
+    }
+}
+
+// MARK: - Unit
+
+extension Cardinal.Test.Unit {
+
+    // MARK: Construction
 
     @Test
     func `construction from UInt`() {
@@ -20,19 +32,12 @@ struct CardinalCountTests {
     }
 
     @Test
-    func `construction from int fails for negative`() {
-        #expect(throws: Cardinal.Error.negativeSource(-1)) {
-            try Cardinal(Int(-1))
-        }
-    }
-
-    @Test
     func `construction succeeds for non-negative`() throws(Cardinal.Error) {
         let result = try Cardinal(42)
         #expect(result == 42)
     }
 
-    // MARK: - Constants
+    // MARK: Constants
 
     @Test
     func `zero constant`() {
@@ -49,7 +54,7 @@ struct CardinalCountTests {
         #expect(Cardinal.max.rawValue == UInt.max)
     }
 
-    // MARK: - Addition
+    // MARK: Addition
 
     @Test
     func `addition operator`() {
@@ -65,15 +70,6 @@ struct CardinalCountTests {
     }
 
     @Test
-    func `add exact throws on overflow`() {
-        let max = Cardinal(UInt.max)
-        let one = Cardinal.one
-        #expect(throws: Cardinal.Error.overflow) {
-            try max.add.exact(one)
-        }
-    }
-
-    @Test
     func `add exact succeeds`() throws(Cardinal.Error) {
         let a: Cardinal = 5
         let b: Cardinal = 3
@@ -81,7 +77,7 @@ struct CardinalCountTests {
         #expect(result == 8)
     }
 
-    // MARK: - Subtraction (Monus)
+    // MARK: Subtraction (Monus)
 
     @Test
     func `subtract saturating`() {
@@ -91,22 +87,9 @@ struct CardinalCountTests {
     }
 
     @Test
-    func `subtract saturating underflow`() {
-        let a: Cardinal = 3
-        let b: Cardinal = 5
-        #expect(a.subtract.saturating(b) == 0)
-    }
-
-    @Test
     func `subtract saturating identity`() {
         let a: Cardinal = 5
         #expect(a.subtract.saturating(.zero) == a)
-    }
-
-    @Test
-    func `subtract saturating from zero`() {
-        let a: Cardinal = 5
-        #expect(Cardinal.zero.subtract.saturating(a) == .zero)
     }
 
     @Test
@@ -123,16 +106,7 @@ struct CardinalCountTests {
         #expect(result == 2)
     }
 
-    @Test
-    func `subtract exact throws on underflow`() {
-        let a: Cardinal = 3
-        let b: Cardinal = 5
-        #expect(throws: Cardinal.Error.underflow) {
-            try a.subtract.exact(b)
-        }
-    }
-
-    // MARK: - Comparison
+    // MARK: Comparison
 
     @Test
     func comparison() {
@@ -145,22 +119,48 @@ struct CardinalCountTests {
         #expect(a == a)
         #expect(a != b)
     }
+}
 
-    // MARK: - String Conversion
+// MARK: - Edge Case
+
+extension Cardinal.Test.`Edge Case` {
 
     @Test
-    func `description matches UInt`() {
-        let count: Cardinal = 42
-        #expect(count.description == "42")
+    func `construction from int fails for negative`() {
+        #expect(throws: Cardinal.Error.negativeSource(-1)) {
+            try Cardinal(Int(-1))
+        }
     }
 
-    // MARK: - Int Conversion
+    @Test
+    func `add exact throws on overflow`() {
+        let max = Cardinal(UInt.max)
+        let one = Cardinal.one
+        #expect(throws: Cardinal.Error.overflow) {
+            try max.add.exact(one)
+        }
+    }
 
     @Test
-    func `int conversion success`() throws(Cardinal.Error) {
-        let count: Cardinal = 42
-        let value = try Int(count)
-        #expect(value == 42)
+    func `subtract saturating underflow`() {
+        let a: Cardinal = 3
+        let b: Cardinal = 5
+        #expect(a.subtract.saturating(b) == 0)
+    }
+
+    @Test
+    func `subtract saturating from zero`() {
+        let a: Cardinal = 5
+        #expect(Cardinal.zero.subtract.saturating(a) == .zero)
+    }
+
+    @Test
+    func `subtract exact throws on underflow`() {
+        let a: Cardinal = 3
+        let b: Cardinal = 5
+        #expect(throws: Cardinal.Error.underflow) {
+            try a.subtract.exact(b)
+        }
     }
 
     @Test
@@ -169,6 +169,24 @@ struct CardinalCountTests {
         #expect(throws: Cardinal.Error.overflow) {
             try Int(count)
         }
+    }
+}
+
+// MARK: - Integration
+
+extension Cardinal.Test.Integration {
+
+    @Test
+    func `description matches UInt`() {
+        let count: Cardinal = 42
+        #expect(count.description == "42")
+    }
+
+    @Test
+    func `int conversion success`() throws(Cardinal.Error) {
+        let count: Cardinal = 42
+        let value = try Int(count)
+        #expect(value == 42)
     }
 
     @Test
