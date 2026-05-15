@@ -15,19 +15,19 @@ struct TaggedCardinalTests {
     // MARK: - Construction
 
     @Test
-    func constructionFromUInt() {
+    func `construction from UInt`() {
         let users = Users(100 as UInt)
         #expect(users.underlying == Cardinal(100))
     }
 
     @Test
-    func constructionFromIntSuccess() throws(Cardinal.Error) {
+    func `construction from int success`() throws(Cardinal.Error) {
         let users = try Users(42)
         #expect(users.underlying == Cardinal(42))
     }
 
     @Test
-    func constructionFromIntFailsForNegative() {
+    func `construction from int fails for negative`() {
         #expect(throws: Cardinal.Error.negativeSource(-3)) {
             try Users(Int(-3))
         }
@@ -36,14 +36,14 @@ struct TaggedCardinalTests {
     // MARK: - Addition
 
     @Test
-    func addSaturating() {
+    func `add saturating`() {
         let max = Users(UInt.max)
         let result = max.add.saturating(Users(1 as UInt))
         #expect(result.underlying == Cardinal(UInt.max))
     }
 
     @Test
-    func addExactThrowsOnOverflow() {
+    func `add exact throws on overflow`() {
         let max = Users(UInt.max)
         let one = Users(1 as UInt)
         #expect(throws: Cardinal.Error.overflow) {
@@ -52,7 +52,7 @@ struct TaggedCardinalTests {
     }
 
     @Test
-    func addExactSucceeds() throws(Cardinal.Error) {
+    func `add exact succeeds`() throws(Cardinal.Error) {
         let a = Users(5 as UInt)
         let b = Users(3 as UInt)
         let result = try a.add.exact(b)
@@ -60,7 +60,7 @@ struct TaggedCardinalTests {
     }
 
     @Test
-    func addCallAsFunctionExact() throws(Cardinal.Error) {
+    func `add call as function exact`() throws(Cardinal.Error) {
         let a = Users(5 as UInt)
         let b = Users(3 as UInt)
         let result = try a.add(b)
@@ -70,7 +70,7 @@ struct TaggedCardinalTests {
     // MARK: - Subtraction
 
     @Test
-    func subtractSaturating() {
+    func `subtract saturating`() {
         let a = Users(5 as UInt)
         let b = Users(3 as UInt)
         let result = a.subtract.saturating(b)
@@ -78,7 +78,7 @@ struct TaggedCardinalTests {
     }
 
     @Test
-    func subtractSaturatingUnderflowClampsToZero() {
+    func `subtract saturating underflow clamps to zero`() {
         let a = Users(3 as UInt)
         let b = Users(5 as UInt)
         let result = a.subtract.saturating(b)
@@ -86,7 +86,7 @@ struct TaggedCardinalTests {
     }
 
     @Test
-    func subtractExactSucceeds() throws(Cardinal.Error) {
+    func `subtract exact succeeds`() throws(Cardinal.Error) {
         let a = Users(5 as UInt)
         let b = Users(3 as UInt)
         let result = try a.subtract.exact(b)
@@ -94,7 +94,7 @@ struct TaggedCardinalTests {
     }
 
     @Test
-    func subtractExactThrowsOnUnderflow() {
+    func `subtract exact throws on underflow`() {
         let a = Users(3 as UInt)
         let b = Users(5 as UInt)
         #expect(throws: Cardinal.Error.underflow) {
@@ -103,7 +103,7 @@ struct TaggedCardinalTests {
     }
 
     @Test
-    func subtractCallAsFunctionExact() throws(Cardinal.Error) {
+    func `subtract call as function exact`() throws(Cardinal.Error) {
         let a = Users(5 as UInt)
         let b = Users(3 as UInt)
         let result = try a.subtract(b)
@@ -113,7 +113,7 @@ struct TaggedCardinalTests {
     // MARK: - Tag Discrimination
 
     @Test
-    func differentTagsAreDistinctTypes() {
+    func `different tags are distinct types`() {
         let users = Users(10 as UInt)
         let inboxItems = InboxItems(10 as UInt)
         #expect(users.underlying == inboxItems.underlying)
@@ -125,14 +125,14 @@ struct TaggedCardinalTests {
     // MARK: - Int Conversion
 
     @Test
-    func intConversionSuccess() throws(Cardinal.Error) {
+    func `int conversion success`() throws(Cardinal.Error) {
         let users = Users(42 as UInt)
         let value = try Int(users)
         #expect(value == 42)
     }
 
     @Test
-    func intConversionThrowsOnOverflow() {
+    func `int conversion throws on overflow`() {
         let users = Users(UInt.max)
         #expect(throws: Cardinal.Error.overflow) {
             try Int(users)
@@ -140,14 +140,14 @@ struct TaggedCardinalTests {
     }
 
     @Test
-    func intBitPatternConversionPreservesBits() {
+    func `int bit pattern conversion preserves bits`() {
         let users = Users(UInt.max)
         let value = Int(bitPattern: users)
         #expect(value == -1)
     }
 
     @Test
-    func intClampingConversionAtMax() {
+    func `int clamping conversion at max`() {
         let users = Users(UInt.max)
         let value = Int(clamping: users)
         #expect(value == Int.max)
