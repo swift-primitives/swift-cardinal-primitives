@@ -135,7 +135,7 @@ struct CardinalCountTests {
     // MARK: - Comparison
 
     @Test
-    func comparison() {
+    func `comparison`() {
         let a: Cardinal = 3
         let b: Cardinal = 5
         #expect(a < b)
