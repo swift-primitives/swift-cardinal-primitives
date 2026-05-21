@@ -52,19 +52,19 @@ extension Swift.Array {
     ///   - initializer: A closure that initializes elements and sets the count
     ///     of the array.
     @inlinable
-    public init<E: Error>(
-        unsafeUninitializedCapacity: some Carrier.`Protocol`<Cardinal>,
+    public init<C: Carrier.`Protocol`<Cardinal>, E: Error>(
+        unsafeUninitializedCapacity: C,
         initializingWith initializer: (
             _ buffer: inout UnsafeMutableBufferPointer<Element>,
-            _ initializedCount: inout Cardinal
+            _ initializedCount: inout C
         ) throws(E) -> Void
     ) throws(E) {
         try unsafe self.init(
             unsafeUninitializedCapacity: Int(bitPattern: unsafeUninitializedCapacity.underlying),
             initializingWith: { (buffer, count) throws(E) -> Void in
-                var cardinalCount = Cardinal(UInt(bitPattern: count))
-                try unsafe initializer(&buffer, &cardinalCount)
-                count = Int(bitPattern: cardinalCount.rawValue)
+                var typedCount = C(Cardinal(UInt(bitPattern: count)))
+                try unsafe initializer(&buffer, &typedCount)
+                count = Int(bitPattern: typedCount.underlying)
             }
         )
     }
