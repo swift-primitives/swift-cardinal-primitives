@@ -1,7 +1,7 @@
 {
   "$schema": "https://swift-institute.org/schemas/research-index-v1.json",
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-05-09",
+  "generatedAt": "2026-05-21",
   "title": "Cardinal Primitives Research",
   "blurb": "",
   "scope": "swift-cardinal-primitives (swift-primitives)",
@@ -27,6 +27,17 @@
       "statusRaw": "DEFERRED",
       "tier": null,
       "scope": null
+    },
+    {
+      "file": "cardinal-sli-overload-expansion-survey.md",
+      "displayName": "cardinal-sli-overload-expansion-survey.md",
+      "topic": "Survey of stdlib APIs warranting typed-Cardinal overloads in Cardinal SLI; placement decision framework (protocol-level vs concrete-type) post-RRC-reserveCapacity precedent",
+      "date": "2026-05-21",
+      "status": "RECOMMENDATION",
+      "statusDetail": "Tier-2 survey identifying ~14 candidate overloads across 3 tiers (protocol-level highest-reach first). Implementation deferred to a focused follow-up handoff.",
+      "statusRaw": "RECOMMENDATION",
+      "tier": 2,
+      "scope": "cross-package"
     }
   ]
 }
