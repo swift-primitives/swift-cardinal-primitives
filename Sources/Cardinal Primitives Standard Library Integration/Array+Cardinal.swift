@@ -11,14 +11,19 @@
 
 public import Carrier_Primitives
 
-// MARK: - Array + Cardinal.Protocol
+// MARK: - Swift.Array + Cardinal.Protocol
 
-extension Array {
+extension Swift.Array {
     /// Reserves enough space to store the specified number of elements.
     ///
     /// Typed-Cardinal overload accepting any `Carrier.`Protocol`<Cardinal>`
     /// conformer (bare `Cardinal` or phantom-typed `Tagged<Tag, Cardinal>`),
     /// removing the `Int(bitPattern:)` dance at the call site.
+    ///
+    /// Qualified as `Swift.Array` (not bare `Array`) because Array_Primitives
+    /// shadows the stdlib symbol when reachable transitively — this overload
+    /// MUST attach to stdlib's `Swift.Array`, not the institute's `~Copyable`
+    /// `Array<Element>`.
     ///
     /// - Parameter minimumCapacity: The requested minimum number of elements.
     @inlinable
