@@ -33,9 +33,9 @@
       "displayName": "cardinal-sli-overload-expansion-survey.md",
       "topic": "Survey of stdlib APIs warranting typed-Cardinal overloads in Cardinal SLI; placement decision framework (protocol-level vs concrete-type) post-RRC-reserveCapacity precedent",
       "date": "2026-05-21",
-      "status": "RECOMMENDATION",
-      "statusDetail": "Tier-2 survey identifying ~14 candidate overloads across 3 tiers (protocol-level highest-reach first). Implementation deferred to a focused follow-up handoff.",
-      "statusRaw": "RECOMMENDATION",
+      "status": "DECISION",
+      "statusDetail": "Tier-2 survey implemented across three tiers. Tier 1 (1fb2691): protocol-level overloads on RRC/BidirectionalCollection/Collection for removeFirst, removeLast, prefix, suffix, dropFirst, dropLast. Tier 2 (5098356): Set/Dictionary per-type overloads (reserveCapacity, init(minimumCapacity:)). Tier 3 (fbad738+15d2e1b): Array/ContiguousArray init(repeating:count:) and init(unsafeUninitializedCapacity:initializingWith:), String.init(repeating:count:). Dead Ends section REVISED — original 'per-type Array silently fails in ~Copyable Self extension' claim REFUTED; root cause was stale Package.resolved (see experiment copyable-self-cardinal-resolution).",
+      "statusRaw": "RECOMMENDATION -> DECISION",
       "tier": 2,
       "scope": "cross-package"
     }

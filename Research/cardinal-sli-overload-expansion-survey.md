@@ -2,9 +2,9 @@
 
 <!--
 ---
-version: 1.0.0
+version: 2.0.0
 last_updated: 2026-05-21
-status: RECOMMENDATION
+status: DECISION
 tier: 2
 scope: cross-package
 ---
@@ -182,7 +182,39 @@ Recommended new files in `Sources/Cardinal Primitives Standard Library Integrati
 
 ## Outcome
 
-**Status**: RECOMMENDATION
+**Status**: DECISION (2026-05-21)
+
+Cardinal SLI expansion implemented across three tiers per the recommendation. ~13 new typed-Cardinal overloads land in `Sources/Cardinal Primitives Standard Library Integration/`. Implementation commits:
+
+| Tier | Commit | Surface |
+|------|--------|---------|
+| Tier 1 | [`1fb2691`](https://github.com/swift-primitives/swift-cardinal-primitives/commit/1fb2691) | `RangeReplaceableCollection.removeFirst`, `BidirectionalCollection.removeLast where Self: RRC`, `Collection.{prefix, suffix, dropFirst, dropLast}` |
+| Tier 2 | [`5098356`](https://github.com/swift-primitives/swift-cardinal-primitives/commit/5098356) | `Set.{reserveCapacity, init(minimumCapacity:)}`, `Dictionary.{reserveCapacity, init(minimumCapacity:)}` |
+| Tier 3 | [`fbad738`](https://github.com/swift-primitives/swift-cardinal-primitives/commit/fbad738) + [`15d2e1b`](https://github.com/swift-primitives/swift-cardinal-primitives/commit/15d2e1b) | `Swift.Array.{init(repeating:count:), init(unsafeUninitializedCapacity:initializingWith:)}`, `ContiguousArray.init(unsafeUninitializedCapacity:initializingWith:)`, `String.init(repeating:count:)` |
+
+Consumer migration (driving the protocol-level Collection overloads in production):
+
+- `swift-sequence-primitives` [`32f6dca`](https://github.com/swift-primitives/swift-sequence-primitives/commit/32f6dca) — `contextBuffer.dropFirst(skip)` via the new `Collection.dropFirst` typed-Cardinal overload.
+
+### Placement deviations from this survey's original recommendation
+
+1. **`prefix`, `dropFirst`, `dropLast`, `suffix` → `Collection`, NOT `Sequence`**. The survey's enumeration above listed `prefix`/`dropFirst`/`dropLast` as "extension on Sequence" with return type `SubSequence`. Empirically incorrect — Sequence has no `SubSequence` associatedtype; all four `(_:Int) -> SubSequence` forms live on `Collection` in stdlib (verified via `_Concurrency.swiftinterface` grep on the macOS 26.x SDK). All four landed on `Collection` in `Collection+Cardinal.swift`. Optimized overrides on `BidirectionalCollection` (for `suffix` and `dropLast`) remain reachable via inner delegation.
+
+2. **`unsafeUninitializedCapacity` uses single generic `C` for both capacity and inout count**. The closure's `initializedCount` parameter is `inout C` of the same `Carrier.\`Protocol\`<Cardinal>` conformer as the capacity — so a caller passing `Index<Element>.Count` receives `inout Index<Element>.Count` in the closure. Internal wrapper bridges to stdlib's `inout Int`. This preserves the count domain across the API rather than collapsing to bare `Cardinal` mid-call.
+
+### Dead Ends (REVISED 2026-05-21)
+
+The original v1.0.0 of this survey claimed:
+
+> Per-type `extension Swift.Array.reserveCapacity(_:Cardinal)` did NOT resolve in `extension Sequence.Protocol where Self: ~Copyable, Element: Copyable` + `@inlinable consuming func`. Root cause unclear; protocol-level placement on RangeReplaceableCollection sidesteps it. Treat per-type Array overloads as resolution-fragile by default; prefer protocol-level when stdlib hosts the method there.
+
+This is now **REFUTED**. The "resolution failure" was misdiagnosed — it was not a Swift compiler overload-resolution limitation. The root cause was a stale `Package.resolved` pin in `swift-sequence-primitives` pointing to `swift-cardinal-primitives @ 4b7a83a` (Initial publication 2026-05-12), which pre-dated the entire reserveCapacity arc. The pinned upstream genuinely had no typed-Cardinal `reserveCapacity` overload — so the compiler correctly failed to find it. `swift package update` re-resolves the local mirror to current `main` HEAD; the typed overload resolves cleanly in `~Copyable Self` extension + `@inlinable consuming func` contexts at every variant tested.
+
+Experiment artifact: [`copyable-self-cardinal-resolution`](../Experiments/copyable-self-cardinal-resolution/) (REFUTED, 2026-05-21). The diagnostic that broke the misdiagnosis: a module-scope `@inlinable` probe outside the `~Copyable Self` extension failed identically, proving the bug was NOT extension-context-specific.
+
+**Implication for past decisions**: the consolidation in commit `3ffa3cd` (per-type Array + ContiguousArray → protocol-level RRC) is still correct on its own merits — single overload covers Array, ContiguousArray, ArraySlice, String, Substring, and any custom RRC conformer with one declaration. But the rationale recorded in that commit message ("the per-type overload was not being considered as an overload candidate in `~Copyable Self` contexts") needs to be read as a misdiagnosis. The consolidation is good for reach; not for "resolution-stress workaround."
+
+### Original recommendation (preserved as historical record)
 
 Proposed expansion of Cardinal SLI to cover ~10 additional stdlib APIs, organized by host (protocol-level vs concrete-type) per the placement decision framework. Prioritization for the follow-up implementation handoff:
 
