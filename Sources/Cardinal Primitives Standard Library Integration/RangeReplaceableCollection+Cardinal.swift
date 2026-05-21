@@ -30,4 +30,17 @@ extension RangeReplaceableCollection {
     public mutating func reserveCapacity(_ minimumCapacity: some Carrier.`Protocol`<Cardinal>) {
         self.reserveCapacity(Int(bitPattern: minimumCapacity.underlying))
     }
+
+    /// Removes the specified number of elements from the beginning of the collection.
+    ///
+    /// Typed-Cardinal overload mirroring stdlib's
+    /// `RangeReplaceableCollection.removeFirst(_:Int)`. Accepts any
+    /// `Carrier.`Protocol`<Cardinal>` conformer (bare `Cardinal` or phantom-typed
+    /// `Tagged<Tag, Cardinal>`), removing the `Int(bitPattern:)` dance at the call site.
+    ///
+    /// - Parameter k: The number of elements to remove.
+    @inlinable
+    public mutating func removeFirst(_ k: some Carrier.`Protocol`<Cardinal>) {
+        self.removeFirst(Int(bitPattern: k.underlying))
+    }
 }
