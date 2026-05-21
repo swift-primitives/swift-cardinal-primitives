@@ -27,15 +27,4 @@ extension ContiguousArray {
         self.init(repeating: repeatedValue, count: Int(bitPattern: count.underlying))
     }
 
-    /// Reserves enough space to store the specified number of elements.
-    ///
-    /// Typed-Cardinal overload accepting any `Carrier.`Protocol`<Cardinal>`
-    /// conformer (bare `Cardinal` or phantom-typed `Tagged<Tag, Cardinal>`),
-    /// removing the `Int(bitPattern:)` dance at the call site.
-    ///
-    /// - Parameter minimumCapacity: The requested minimum number of elements.
-    @inlinable
-    public mutating func reserveCapacity(_ minimumCapacity: some Carrier.`Protocol`<Cardinal>) {
-        self.reserveCapacity(Int(bitPattern: minimumCapacity.underlying))
-    }
 }

@@ -11,19 +11,19 @@
 
 public import Carrier_Primitives
 
-// MARK: - Swift.Array + Cardinal.Protocol
+// MARK: - RangeReplaceableCollection + Cardinal.Protocol
 
-extension Swift.Array {
+extension RangeReplaceableCollection {
     /// Reserves enough space to store the specified number of elements.
     ///
     /// Typed-Cardinal overload accepting any `Carrier.`Protocol`<Cardinal>`
     /// conformer (bare `Cardinal` or phantom-typed `Tagged<Tag, Cardinal>`),
     /// removing the `Int(bitPattern:)` dance at the call site.
     ///
-    /// Qualified as `Swift.Array` (not bare `Array`) because Array_Primitives
-    /// shadows the stdlib symbol when reachable transitively — this overload
-    /// MUST attach to stdlib's `Swift.Array`, not the institute's `~Copyable`
-    /// `Array<Element>`.
+    /// Placed on `RangeReplaceableCollection` (the protocol-level home for
+    /// `reserveCapacity`) so the overload covers `Array`, `ContiguousArray`,
+    /// `ArraySlice`, `String`, `Substring`, and any custom RRC conformer
+    /// uniformly — one overload, broadest reach.
     ///
     /// - Parameter minimumCapacity: The requested minimum number of elements.
     @inlinable
