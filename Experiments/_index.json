@@ -7,6 +7,21 @@
   "scope": "swift-cardinal-primitives (swift-primitives)",
   "experiments": [
     {
+      "directory": "copyable-self-cardinal-resolution",
+      "displayName": "copyable-self-cardinal-resolution",
+      "purpose": "Investigate hypothesized Swift compiler overload-resolution failure for typed-Cardinal SLI overloads in ~Copyable Self extension + @inlinable consuming func contexts",
+      "date": "2026-05-21",
+      "toolchain": "Apple Swift 6.x (Xcode 26.x)",
+      "status": "REFUTED",
+      "statusDetail": "Hypothesis (compiler bug) refuted. Root cause was stale Package.resolved pin in swift-sequence-primitives pointing to cardinal-primitives 4b7a83a (pre-SLI publication 2026-05-12), not a Swift compiler limitation. Fix: swift package update in consumer. Misdiagnosis corrects the 'Dead Ends' section in cardinal-sli-overload-expansion-survey.md.",
+      "statusRaw": "INVESTIGATION -> REFUTED",
+      "supersededBy": null,
+      "crossRefs": [
+        "swift-cardinal-primitives Research/cardinal-sli-overload-expansion-survey.md",
+        "swift-sequence-primitives @ 1f8965a"
+      ]
+    },
+    {
       "directory": "cardinal-protocol-abstraction",
       "displayName": "cardinal-protocol-abstraction",
       "purpose": "Validate Cardinal.Protocol pattern: nested protocol, Tagged conformance, type-preserving generics",
