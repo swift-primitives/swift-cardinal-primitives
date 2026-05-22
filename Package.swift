@@ -31,10 +31,6 @@ let package = Package(
             targets: ["Cardinal Subtract Primitives"]
         ),
         .library(
-            name: "Cardinal Carrier Primitives",
-            targets: ["Cardinal Carrier Primitives"]
-        ),
-        .library(
             name: "Cardinal Equation Primitives",
             targets: ["Cardinal Equation Primitives"]
         ),
@@ -76,6 +72,7 @@ let package = Package(
         .package(url: "https://github.com/swift-primitives/swift-equation-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-hash-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-comparison-primitives.git", branch: "main"),
+        .package(path: "../swift-cardinal-carrier-primitives"),
     ],
     targets: [
 
@@ -104,16 +101,9 @@ let package = Package(
             name: "Cardinal Subtract Primitives",
             dependencies: [
                 "Cardinal Primitive",
-                "Cardinal Carrier Primitives",
                 "Cardinal Error Primitives",
+                .product(name: "Cardinal Carrier Primitives", package: "swift-cardinal-carrier-primitives"),
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
-            ]
-        ),
-        .target(
-            name: "Cardinal Carrier Primitives",
-            dependencies: [
-                "Cardinal Primitive",
-                .product(name: "Carrier Primitives", package: "swift-carrier-primitives"),
             ]
         ),
         .target(
@@ -155,7 +145,7 @@ let package = Package(
             dependencies: [
                 "Cardinal Primitive",
                 "Cardinal Error Primitives",
-                "Cardinal Carrier Primitives",
+                .product(name: "Cardinal Carrier Primitives", package: "swift-cardinal-carrier-primitives"),
                 .product(name: "Carrier Primitives", package: "swift-carrier-primitives"),
                 .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
                 .product(name: "Tagged Primitives Standard Library Integration", package: "swift-tagged-primitives"),
@@ -170,12 +160,12 @@ let package = Package(
                 "Cardinal Error Primitives",
                 "Cardinal Add Primitives",
                 "Cardinal Subtract Primitives",
-                "Cardinal Carrier Primitives",
                 "Cardinal Equation Primitives",
                 "Cardinal Hash Primitives",
                 "Cardinal Comparison Primitives",
                 "Cardinal Tagged Primitives",
                 "Cardinal Primitives Standard Library Integration",
+                .product(name: "Cardinal Carrier Primitives", package: "swift-cardinal-carrier-primitives"),
                 .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
             ]
         ),
