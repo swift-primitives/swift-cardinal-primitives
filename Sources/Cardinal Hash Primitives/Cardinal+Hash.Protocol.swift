@@ -13,6 +13,9 @@
 // the same file as the type. The single-property hash collapses to a single
 // `combine` over `rawValue`.
 
+public import Cardinal_Namespace
+public import Hash_Primitives
+
 extension Cardinal: Hash.`Protocol` {
     /// Feeds the underlying value into the given hasher.
     @inlinable
@@ -20,3 +23,7 @@ extension Cardinal: Hash.`Protocol` {
         hasher.combine(rawValue)
     }
 }
+
+#if swift(<6.4)
+    extension Cardinal: Hashable {}
+#endif

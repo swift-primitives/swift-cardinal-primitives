@@ -1,3 +1,6 @@
+public import Cardinal_Namespace
+public import Cardinal_Carrier_Primitives
+public import Cardinal_Error_Primitives
 public import Property_Primitives
 
 extension Cardinal {

@@ -9,60 +9,60 @@
 //
 // ===----------------------------------------------------------------------===//
 
-// MARK: - Tagged<Tag, Cardinal>.Add
+public import Cardinal_Namespace
+public import Cardinal_Error_Primitives
+public import Cardinal_Subtract_Primitives
+public import Property_Primitives
+public import Tagged_Primitives
+
+// MARK: - Tagged<Tag, Cardinal>.Subtract
 
 extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
-    /// Tag for addition operations on tagged cardinals.
-    public enum Add {}
+    /// Tag for subtraction operations on tagged cardinals.
+    public enum Subtract {}
 }
 
-// MARK: - Tagged<Tag, Cardinal> Addition (Property-based)
+// MARK: - Tagged<Tag, Cardinal> Subtraction (Property-based)
 
 extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
-    /// Access to policy-aware addition operations.
-    ///
-    /// Use this accessor when you need control over overflow behavior:
-    /// - `.add.saturating(_:)` — clamps at `UInt.max`
-    /// - `.add.exact(_:)` — throws on overflow
-    ///
-    /// For trapping addition (Swift integer semantics), use the `+` operator.
+    /// Access to subtraction operations.
     ///
     /// ```swift
-    /// let total = size.add.saturating(increment)
-    /// let exact = try size.add.exact(increment)
+    /// let remaining = size.subtract.saturating(dropCount)
+    /// let exact = try size.subtract.exact(dropCount)
     /// ```
     @inlinable
-    public var add: Property<Add, Self> {
+    public var subtract: Property<Subtract, Self> {
         Property(self)
     }
 }
 
 extension Property {
-    /// Saturating addition: returns `min(UInt.max, self + other)`.
+    /// Saturating subtraction: returns `max(0, self - other)`.
     @inlinable
     public func saturating<T: ~Copyable>(_ other: Base) -> Base
     where
-        Tag == Tagged<T, Cardinal>.Add,
+        Tag == Tagged<T, Cardinal>.Subtract,
         Base == Tagged<T, Cardinal>
     {
-        base.map { $0.add.saturating(other.underlying) }
+        base.map { $0.subtract.saturating(other.underlying) }
     }
 
-    /// Exact addition: returns `self + other` or throws if overflow.
+    /// Exact subtraction: returns `self - other` or throws if negative.
     @inlinable
     public func exact<T: ~Copyable>(_ other: Base) throws(Cardinal.Error) -> Base
     where
-        Tag == Tagged<T, Cardinal>.Add,
+        Tag == Tagged<T, Cardinal>.Subtract,
         Base == Tagged<T, Cardinal>
     {
-        try base.map { cardinal throws(Cardinal.Error) in try cardinal.add.exact(other.underlying) }
+        try base.map { cardinal throws(Cardinal.Error) in try cardinal.subtract.exact(other.underlying) }
     }
 
-    /// Callable syntax for exact addition.
+    /// Callable syntax for exact subtraction.
     @inlinable
     public func callAsFunction<T: ~Copyable>(_ other: Base) throws(Cardinal.Error) -> Base
     where
-        Tag == Tagged<T, Cardinal>.Add,
+        Tag == Tagged<T, Cardinal>.Subtract,
         Base == Tagged<T, Cardinal>
     {
         try self.exact(other)

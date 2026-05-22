@@ -9,20 +9,13 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Cardinal_Namespace
+public import Cardinal_Error_Primitives
 public import Tagged_Primitives
 
-// MARK: - Tagged<Tag, Cardinal> Construction
-//
-// `init(_ count: Cardinal)` is provided by Tagged's unconditional
-// `Carrier.\`Protocol\`` conformance.
+// MARK: - Tagged<Tag, Cardinal> Int Construction (stdlib-bridging)
 
 extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
-    /// Creates a tagged cardinal from an unsigned integer.
-    @inlinable
-    public init(_ uint: UInt) {
-        self.init(Cardinal(uint))
-    }
-
     /// Creates a tagged cardinal from a signed integer.
     ///
     /// - Parameter int: The count value. Must be non-negative.

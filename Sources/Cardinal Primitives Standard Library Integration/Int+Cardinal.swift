@@ -1,3 +1,5 @@
+public import Cardinal_Error_Primitives
+public import Cardinal_Namespace
 public import Carrier_Primitives
 
 // MARK: - Int to Cardinal Conversions

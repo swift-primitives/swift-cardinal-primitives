@@ -9,6 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
+public import Cardinal_Namespace
+
 extension Cardinal: CustomStringConvertible {
     /// A textual representation of this cardinal — the underlying `UInt` rendered as decimal.
     public var description: String { rawValue.description }

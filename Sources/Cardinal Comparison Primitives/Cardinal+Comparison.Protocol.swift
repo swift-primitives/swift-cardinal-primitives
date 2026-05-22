@@ -8,4 +8,11 @@
 // `extension Cardinal: Comparable {}` in `Cardinal.swift` is guarded
 // `#if swift(<6.4)` to avoid duplicate-conformance.
 
+public import Cardinal_Namespace
+public import Comparison_Primitives
+
 extension Cardinal: Comparison.`Protocol` {}
+
+#if swift(<6.4)
+    extension Cardinal: Comparable {}
+#endif

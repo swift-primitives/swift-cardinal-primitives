@@ -11,18 +11,59 @@ let package = Package(
         .visionOS(.v26),
     ],
     products: [
+        // MARK: - Namespace
         .library(
-            name: "Cardinal Primitives",
-            targets: ["Cardinal Primitives"]
+            name: "Cardinal Namespace",
+            targets: ["Cardinal Namespace"]
+        ),
+
+        // MARK: - Sub-namespace targets
+        .library(
+            name: "Cardinal Error Primitives",
+            targets: ["Cardinal Error Primitives"]
         ),
         .library(
-            name: "Cardinal Primitives Core",
-            targets: ["Cardinal Primitives Core"]
+            name: "Cardinal Add Primitives",
+            targets: ["Cardinal Add Primitives"]
         ),
+        .library(
+            name: "Cardinal Subtract Primitives",
+            targets: ["Cardinal Subtract Primitives"]
+        ),
+        .library(
+            name: "Cardinal Carrier Primitives",
+            targets: ["Cardinal Carrier Primitives"]
+        ),
+        .library(
+            name: "Cardinal Equation Primitives",
+            targets: ["Cardinal Equation Primitives"]
+        ),
+        .library(
+            name: "Cardinal Hash Primitives",
+            targets: ["Cardinal Hash Primitives"]
+        ),
+        .library(
+            name: "Cardinal Comparison Primitives",
+            targets: ["Cardinal Comparison Primitives"]
+        ),
+        .library(
+            name: "Cardinal Tagged Primitives",
+            targets: ["Cardinal Tagged Primitives"]
+        ),
+
+        // MARK: - StdLib Integration
         .library(
             name: "Cardinal Primitives Standard Library Integration",
             targets: ["Cardinal Primitives Standard Library Integration"]
         ),
+
+        // MARK: - Umbrella
+        .library(
+            name: "Cardinal Primitives",
+            targets: ["Cardinal Primitives"]
+        ),
+
+        // MARK: - Test Support
         .library(
             name: "Cardinal Primitives Test Support",
             targets: ["Cardinal Primitives Test Support"]
@@ -38,25 +79,73 @@ let package = Package(
     ],
     targets: [
 
-        // MARK: - Core
+        // MARK: - Namespace
         .target(
-            name: "Cardinal Primitives Core",
+            name: "Cardinal Namespace",
+            dependencies: []
+        ),
+
+        // MARK: - Sub-namespace targets (per [MOD-031])
+        .target(
+            name: "Cardinal Error Primitives",
             dependencies: [
-                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
-                .product(name: "Carrier Primitives", package: "swift-carrier-primitives"),
+                "Cardinal Namespace",
+            ]
+        ),
+        .target(
+            name: "Cardinal Add Primitives",
+            dependencies: [
+                "Cardinal Namespace",
+                "Cardinal Error Primitives",
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
+            ]
+        ),
+        .target(
+            name: "Cardinal Subtract Primitives",
+            dependencies: [
+                "Cardinal Namespace",
+                "Cardinal Carrier Primitives",
+                "Cardinal Error Primitives",
+                .product(name: "Property Primitives", package: "swift-property-primitives"),
+            ]
+        ),
+        .target(
+            name: "Cardinal Carrier Primitives",
+            dependencies: [
+                "Cardinal Namespace",
+                .product(name: "Carrier Primitives", package: "swift-carrier-primitives"),
+            ]
+        ),
+        .target(
+            name: "Cardinal Equation Primitives",
+            dependencies: [
+                "Cardinal Namespace",
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
+            ]
+        ),
+        .target(
+            name: "Cardinal Hash Primitives",
+            dependencies: [
+                "Cardinal Namespace",
                 .product(name: "Hash Primitives", package: "swift-hash-primitives"),
+            ]
+        ),
+        .target(
+            name: "Cardinal Comparison Primitives",
+            dependencies: [
+                "Cardinal Namespace",
                 .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
             ]
         ),
-
-        // MARK: - Umbrella
         .target(
-            name: "Cardinal Primitives",
+            name: "Cardinal Tagged Primitives",
             dependencies: [
-                "Cardinal Primitives Core",
-                "Cardinal Primitives Standard Library Integration",
+                "Cardinal Namespace",
+                "Cardinal Error Primitives",
+                "Cardinal Add Primitives",
+                "Cardinal Subtract Primitives",
+                .product(name: "Property Primitives", package: "swift-property-primitives"),
+                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
             ]
         ),
 
@@ -64,9 +153,30 @@ let package = Package(
         .target(
             name: "Cardinal Primitives Standard Library Integration",
             dependencies: [
-                "Cardinal Primitives Core",
+                "Cardinal Namespace",
+                "Cardinal Error Primitives",
+                "Cardinal Carrier Primitives",
                 .product(name: "Carrier Primitives", package: "swift-carrier-primitives"),
+                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
                 .product(name: "Tagged Primitives Standard Library Integration", package: "swift-tagged-primitives"),
+            ]
+        ),
+
+        // MARK: - Umbrella
+        .target(
+            name: "Cardinal Primitives",
+            dependencies: [
+                "Cardinal Namespace",
+                "Cardinal Error Primitives",
+                "Cardinal Add Primitives",
+                "Cardinal Subtract Primitives",
+                "Cardinal Carrier Primitives",
+                "Cardinal Equation Primitives",
+                "Cardinal Hash Primitives",
+                "Cardinal Comparison Primitives",
+                "Cardinal Tagged Primitives",
+                "Cardinal Primitives Standard Library Integration",
+                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
             ]
         ),
 

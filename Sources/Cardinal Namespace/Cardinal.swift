@@ -39,16 +39,12 @@ public struct Cardinal {
     public let rawValue: UInt
 }
 
-// Stdlib Hashable / Comparable conformances are gated `#if swift(<6.4)` only.
-// On Swift 6.4+ each institute `*.Protocol` is a typealias to its stdlib
-// counterpart per SE-0499, so the unconditional institute conformance in
-// `Cardinal+Hash.Protocol.swift` / `Cardinal+Comparison.Protocol.swift` IS
-// the stdlib conformance. Both lines would error as duplicate conformance
-// on 6.4. Pattern matches swift-pair-primitives / swift-either-primitives.
-#if swift(<6.4)
-    extension Cardinal: Hashable {}
-    extension Cardinal: Comparable {}
-#endif
+// Stdlib `Hashable` and `Comparable` conformances live alongside their
+// institute counterparts in `Cardinal Hash Primitives` /
+// `Cardinal Comparison Primitives` (gated `#if swift(<6.4)` only — on
+// Swift 6.4+ each institute `*.Protocol` is a typealias to its stdlib
+// counterpart per SE-0499, so the unconditional institute conformance IS
+// the stdlib conformance).
 extension Cardinal: Sendable {}
 
 extension Cardinal {

@@ -1,3 +1,5 @@
+public import Cardinal_Namespace
+
 extension Cardinal {
     /// Errors that can occur during cardinal operations.
     public enum Error: Swift.Error, Hashable, Sendable {
