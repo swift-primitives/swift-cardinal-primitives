@@ -1,3 +1,5 @@
+public import Carrier_Primitives
+
 // MARK: - Int to Cardinal Conversions
 
 extension Cardinal {
@@ -46,6 +48,20 @@ extension Int {
     @inlinable
     public init(bitPattern cardinal: Cardinal) {
         self = Int(bitPattern: cardinal.rawValue)
+    }
+
+    /// Creates an integer by reinterpreting the bit pattern of any
+    /// `Carrier.`Protocol`<Cardinal>` conformer.
+    ///
+    /// Generic typed-Cardinal overload covering bare `Cardinal` AND phantom-typed
+    /// `Tagged<Tag, Cardinal>` (including `Index<Element>.Count`,
+    /// `Memory.Address.Count`, etc.) without requiring callers to unwrap via
+    /// `.underlying` / `.cardinal` accessor chains at the call site.
+    ///
+    /// - Parameter carrier: Any conformer to `Carrier.`Protocol`<Cardinal>`.
+    @inlinable
+    public init(bitPattern carrier: some Carrier.`Protocol`<Cardinal>) {
+        self = Int(bitPattern: carrier.underlying)
     }
 
     /// Creates an integer from a count, clamping to `Int.max` if too large.
