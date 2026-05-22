@@ -9,7 +9,7 @@
 //
 // ===----------------------------------------------------------------------===//
 
-public import Cardinal_Namespace
+public import Cardinal_Primitive
 
 extension Cardinal: CustomStringConvertible {
     /// A textual representation of this cardinal — the underlying `UInt` rendered as decimal.

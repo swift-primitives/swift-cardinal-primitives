@@ -9,7 +9,7 @@
 //
 // ===----------------------------------------------------------------------===//
 
-public import Cardinal_Namespace
+public import Cardinal_Primitive
 public import Tagged_Primitives
 
 // MARK: - Tagged<Tag, Cardinal> Construction

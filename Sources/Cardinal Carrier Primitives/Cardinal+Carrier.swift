@@ -3,7 +3,7 @@
 // per-type accessor + arithmetic + constants live as constrained
 // extensions on `Carrier.`Protocol` where Underlying == Cardinal`.
 
-public import Cardinal_Namespace
+public import Cardinal_Primitive
 public import Carrier_Primitives
 
 // MARK: - Carrier Conformance (trivial self-carrier)

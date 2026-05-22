@@ -13,8 +13,8 @@ let package = Package(
     products: [
         // MARK: - Namespace
         .library(
-            name: "Cardinal Namespace",
-            targets: ["Cardinal Namespace"]
+            name: "Cardinal Primitive",
+            targets: ["Cardinal Primitive"]
         ),
 
         // MARK: - Sub-namespace targets
@@ -81,7 +81,7 @@ let package = Package(
 
         // MARK: - Namespace
         .target(
-            name: "Cardinal Namespace",
+            name: "Cardinal Primitive",
             dependencies: []
         ),
 
@@ -89,13 +89,13 @@ let package = Package(
         .target(
             name: "Cardinal Error Primitives",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
             ]
         ),
         .target(
             name: "Cardinal Add Primitives",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
                 "Cardinal Error Primitives",
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
             ]
@@ -103,7 +103,7 @@ let package = Package(
         .target(
             name: "Cardinal Subtract Primitives",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
                 "Cardinal Carrier Primitives",
                 "Cardinal Error Primitives",
                 .product(name: "Property Primitives", package: "swift-property-primitives"),
@@ -112,35 +112,35 @@ let package = Package(
         .target(
             name: "Cardinal Carrier Primitives",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
                 .product(name: "Carrier Primitives", package: "swift-carrier-primitives"),
             ]
         ),
         .target(
             name: "Cardinal Equation Primitives",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
                 .product(name: "Equation Primitives", package: "swift-equation-primitives"),
             ]
         ),
         .target(
             name: "Cardinal Hash Primitives",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
                 .product(name: "Hash Primitives", package: "swift-hash-primitives"),
             ]
         ),
         .target(
             name: "Cardinal Comparison Primitives",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
                 .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
             ]
         ),
         .target(
             name: "Cardinal Tagged Primitives",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
                 "Cardinal Error Primitives",
                 "Cardinal Add Primitives",
                 "Cardinal Subtract Primitives",
@@ -153,7 +153,7 @@ let package = Package(
         .target(
             name: "Cardinal Primitives Standard Library Integration",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
                 "Cardinal Error Primitives",
                 "Cardinal Carrier Primitives",
                 .product(name: "Carrier Primitives", package: "swift-carrier-primitives"),
@@ -166,7 +166,7 @@ let package = Package(
         .target(
             name: "Cardinal Primitives",
             dependencies: [
-                "Cardinal Namespace",
+                "Cardinal Primitive",
                 "Cardinal Error Primitives",
                 "Cardinal Add Primitives",
                 "Cardinal Subtract Primitives",

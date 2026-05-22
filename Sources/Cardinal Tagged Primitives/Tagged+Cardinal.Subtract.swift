@@ -9,7 +9,7 @@
 //
 // ===----------------------------------------------------------------------===//
 
-public import Cardinal_Namespace
+public import Cardinal_Primitive
 public import Cardinal_Error_Primitives
 public import Cardinal_Subtract_Primitives
 public import Property_Primitives

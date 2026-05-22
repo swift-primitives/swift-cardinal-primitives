@@ -13,7 +13,7 @@
 // the same file as the type. The single-property hash collapses to a single
 // `combine` over `rawValue`.
 
-public import Cardinal_Namespace
+public import Cardinal_Primitive
 public import Hash_Primitives
 
 extension Cardinal: Hash.`Protocol` {

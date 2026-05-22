@@ -1,4 +1,4 @@
-public import Cardinal_Namespace
+public import Cardinal_Primitive
 
 extension Cardinal {
     /// Errors that can occur during cardinal operations.

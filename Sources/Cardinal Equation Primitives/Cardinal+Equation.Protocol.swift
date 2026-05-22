@@ -8,7 +8,7 @@
 // `extension Cardinal: Hashable {}` in `Cardinal.swift` is guarded
 // `#if swift(<6.4)` to avoid duplicate-conformance.
 
-public import Cardinal_Namespace
+public import Cardinal_Primitive
 public import Equation_Primitives
 
 extension Cardinal: Equation.`Protocol` {}
