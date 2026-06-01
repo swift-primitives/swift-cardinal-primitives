@@ -15,7 +15,7 @@ public import Tagged_Primitives
 
 // MARK: - Tagged<Tag, Cardinal> Int Construction (stdlib-bridging)
 
-extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
+extension Tagged where Underlying == Cardinal, Tag: ~Copyable & ~Escapable {
     /// Creates a tagged cardinal from a signed integer.
     ///
     /// - Parameter int: The count value. Must be non-negative.
@@ -31,7 +31,7 @@ extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
 extension Int {
     /// Creates an integer from a tagged cardinal, throwing if it exceeds `Int.max`.
     @inlinable
-    public init<Tag: ~Copyable>(_ count: Tagged<Tag, Cardinal>) throws(Cardinal.Error) {
+    public init<Tag: ~Copyable & ~Escapable>(_ count: Tagged<Tag, Cardinal>) throws(Cardinal.Error) {
         self = try Int(count.underlying)
     }
 
@@ -39,7 +39,7 @@ extension Int {
     ///
     /// This is an unchecked conversion for low-level operations like pointer arithmetic.
     @inlinable
-    public init<Tag: ~Copyable>(bitPattern count: Tagged<Tag, Cardinal>) {
+    public init<Tag: ~Copyable & ~Escapable>(bitPattern count: Tagged<Tag, Cardinal>) {
         self = Int(bitPattern: count.underlying)
     }
 
@@ -47,7 +47,7 @@ extension Int {
     ///
     /// Use this for APIs like `Sequence.underestimatedCount` that return `Int`.
     @inlinable
-    public init<Tag: ~Copyable>(clamping count: Tagged<Tag, Cardinal>) {
+    public init<Tag: ~Copyable & ~Escapable>(clamping count: Tagged<Tag, Cardinal>) {
         self = Int(clamping: count.underlying)
     }
 }

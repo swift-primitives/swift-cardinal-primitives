@@ -17,7 +17,7 @@ public import Tagged_Primitives
 // `init(_ count: Cardinal)` is provided by Tagged's unconditional
 // `Carrier.\`Protocol\`` conformance.
 
-extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
+extension Tagged where Underlying == Cardinal, Tag: ~Copyable & ~Escapable {
     /// Creates a tagged cardinal from an unsigned integer.
     @inlinable
     public init(_ uint: UInt) {

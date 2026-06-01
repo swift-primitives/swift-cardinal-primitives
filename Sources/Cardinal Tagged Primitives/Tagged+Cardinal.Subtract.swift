@@ -17,14 +17,14 @@ public import Tagged_Primitives
 
 // MARK: - Tagged<Tag, Cardinal>.Subtract
 
-extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
+extension Tagged where Underlying == Cardinal, Tag: ~Copyable & ~Escapable {
     /// Tag for subtraction operations on tagged cardinals.
     public enum Subtract {}
 }
 
 // MARK: - Tagged<Tag, Cardinal> Subtraction (Property-based)
 
-extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
+extension Tagged where Underlying == Cardinal, Tag: ~Copyable & ~Escapable {
     /// Access to subtraction operations.
     ///
     /// ```swift
@@ -40,7 +40,7 @@ extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
 extension Property {
     /// Saturating subtraction: returns `max(0, self - other)`.
     @inlinable
-    public func saturating<T: ~Copyable>(_ other: Base) -> Base
+    public func saturating<T: ~Copyable & ~Escapable>(_ other: Base) -> Base
     where
         Tag == Tagged<T, Cardinal>.Subtract,
         Base == Tagged<T, Cardinal>
@@ -50,7 +50,7 @@ extension Property {
 
     /// Exact subtraction: returns `self - other` or throws if negative.
     @inlinable
-    public func exact<T: ~Copyable>(_ other: Base) throws(Cardinal.Error) -> Base
+    public func exact<T: ~Copyable & ~Escapable>(_ other: Base) throws(Cardinal.Error) -> Base
     where
         Tag == Tagged<T, Cardinal>.Subtract,
         Base == Tagged<T, Cardinal>
@@ -60,7 +60,7 @@ extension Property {
 
     /// Callable syntax for exact subtraction.
     @inlinable
-    public func callAsFunction<T: ~Copyable>(_ other: Base) throws(Cardinal.Error) -> Base
+    public func callAsFunction<T: ~Copyable & ~Escapable>(_ other: Base) throws(Cardinal.Error) -> Base
     where
         Tag == Tagged<T, Cardinal>.Subtract,
         Base == Tagged<T, Cardinal>

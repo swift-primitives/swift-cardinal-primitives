@@ -16,14 +16,14 @@ public import Tagged_Primitives
 
 // MARK: - Tagged<Tag, Cardinal>.Add
 
-extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
+extension Tagged where Underlying == Cardinal, Tag: ~Copyable & ~Escapable {
     /// Tag for addition operations on tagged cardinals.
     public enum Add {}
 }
 
 // MARK: - Tagged<Tag, Cardinal> Addition (Property-based)
 
-extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
+extension Tagged where Underlying == Cardinal, Tag: ~Copyable & ~Escapable {
     /// Access to policy-aware addition operations.
     ///
     /// Use this accessor when you need control over overflow behavior:
@@ -45,7 +45,7 @@ extension Tagged where Underlying == Cardinal, Tag: ~Copyable {
 extension Property {
     /// Saturating addition: returns `min(UInt.max, self + other)`.
     @inlinable
-    public func saturating<T: ~Copyable>(_ other: Base) -> Base
+    public func saturating<T: ~Copyable & ~Escapable>(_ other: Base) -> Base
     where
         Tag == Tagged<T, Cardinal>.Add,
         Base == Tagged<T, Cardinal>
@@ -55,7 +55,7 @@ extension Property {
 
     /// Exact addition: returns `self + other` or throws if overflow.
     @inlinable
-    public func exact<T: ~Copyable>(_ other: Base) throws(Cardinal.Error) -> Base
+    public func exact<T: ~Copyable & ~Escapable>(_ other: Base) throws(Cardinal.Error) -> Base
     where
         Tag == Tagged<T, Cardinal>.Add,
         Base == Tagged<T, Cardinal>
@@ -65,7 +65,7 @@ extension Property {
 
     /// Callable syntax for exact addition.
     @inlinable
-    public func callAsFunction<T: ~Copyable>(_ other: Base) throws(Cardinal.Error) -> Base
+    public func callAsFunction<T: ~Copyable & ~Escapable>(_ other: Base) throws(Cardinal.Error) -> Base
     where
         Tag == Tagged<T, Cardinal>.Add,
         Base == Tagged<T, Cardinal>
