@@ -50,7 +50,8 @@ import Primitives_Linter_Rule_RawValue
 
 Lint.run(dependencies: [
     .package(
-        path: "../swift-primitives-linter-rules",
+        url: "https://github.com/swift-primitives/swift-primitives-linter-rules.git",
+        branch: "main",
         products: [
             "Linter Primitives Rules",
             "Primitives Linter Rule Cardinal",
@@ -58,7 +59,8 @@ Lint.run(dependencies: [
         ]
     ),
     .package(
-        path: "../../swift-foundations/swift-institute-linter-rules",
+        url: "https://github.com/swift-foundations/swift-institute-linter-rules.git",
+        branch: "main",
         products: [
             "Institute Linter Rule Memory",
             "Institute Linter Rule Naming",
