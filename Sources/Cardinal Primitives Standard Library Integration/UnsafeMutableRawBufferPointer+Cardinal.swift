@@ -42,7 +42,7 @@ extension UnsafeMutableRawBufferPointer {
         byteCount: some Carrier.`Protocol`<Cardinal>,
         alignment: some Carrier.`Protocol`<Cardinal>
     ) -> UnsafeMutableRawBufferPointer {
-        UnsafeMutableRawBufferPointer.allocate(
+        Self.allocate(
             byteCount: Int(bitPattern: byteCount.underlying),
             alignment: Int(bitPattern: alignment.underlying)
         )

@@ -9,8 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
-public import Cardinal_Primitive
 public import Cardinal_Add_Primitives
+public import Cardinal_Primitive
 public import Property_Primitives
 public import Tagged_Primitives
 

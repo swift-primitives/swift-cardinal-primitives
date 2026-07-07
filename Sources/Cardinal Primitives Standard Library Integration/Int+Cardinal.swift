@@ -12,7 +12,7 @@ extension Cardinal {
     @inlinable
     public init(
         _ value: Swift.Int
-    ) throws(Cardinal.Error) {
+    ) throws(Self.Error) {
         guard value >= .zero else {
             throw .negativeSource(value)
         }

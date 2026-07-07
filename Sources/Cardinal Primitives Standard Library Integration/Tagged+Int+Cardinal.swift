@@ -9,8 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
-public import Cardinal_Primitive
 public import Cardinal_Error_Primitives
+public import Cardinal_Primitive
 public import Tagged_Primitives
 
 // MARK: - Tagged<Tag, Cardinal> Int Construction (stdlib-bridging)
