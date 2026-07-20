@@ -23,17 +23,17 @@ extension Swift.MutableSpan where Element: ~Copyable {
     ///   - start: A pointer to the start of the span.
     ///   - count: The number of elements in the span.
     /// - Warning: The caller must ensure lifetime safety.
-    @_lifetime(immortal)
+    @unsafe
+    @_lifetime(borrow start)
     @inlinable
     public init(
         _unsafeStart start: UnsafeMutablePointer<Element>,
         count: some Carrier.`Protocol`<Cardinal>
     ) {
-        let span = unsafe Swift.MutableSpan(
+        unsafe self.init(
             _unsafeStart: start,
             count: Int(bitPattern: count.underlying)
         )
-        unsafe (self = _overrideLifetime(span, borrowing: ()))
     }
 
     /// Returns a mutable span over the first `maxLength` elements.
