@@ -26,6 +26,7 @@ extension RawSpan {
     ///   - pointer: A pointer to the start of the span.
     ///   - byteCount: The number of bytes in the span.
     /// - Warning: The caller must ensure lifetime safety.
+    @unsafe
     @_lifetime(borrow pointer)
     @inlinable
     public init(
